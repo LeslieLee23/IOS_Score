@@ -1,10 +1,4 @@
-//
-//  NameAndScore.swift
-//  Score1031
-//
-//  Created by Danting Li on 1/19/20.
-//  Copyright © 2020 HULUCave. All rights reserved.
-//
+
 import Foundation
 import SwiftUI
 import Combine

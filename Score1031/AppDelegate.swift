@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Score1031
-//
-//  Created by Danting Li on 10/31/19.
-//  Copyright © 2019 HULUCave. All rights reserved.
-//
-
 import UIKit
 import CoreData
 
