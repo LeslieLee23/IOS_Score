@@ -7,26 +7,26 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct HistoryView: View {
-    @EnvironmentObject var historyStore: HistoryStore
     @State var modalIsPresented = false
+    //CoreData var
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
+   // @State private var record = ""
 
     
     var body: some View {
+        NavigationView {
+            List {
+                ForEach(self.records) {record in
+                    RecordView(name: record.name!, score: record.score!, reason: record.reason!)
+                }
 
-        
-        
-        
-            List(historyStore.historys) {history in
-                VStack{
-                HStack {
-                Text(history.name)
-                Text(history.addedScore)
-                Text(history.reason)
-                }
-                }
+            }
         }
+    .navigationBarTitle(Text("Score Change History"))
     }
 }
 

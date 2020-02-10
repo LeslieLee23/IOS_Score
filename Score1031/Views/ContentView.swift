@@ -8,14 +8,16 @@
 import Foundation
 import SwiftUI
 import Combine
-
-
+import CoreData
 
 struct ContentView: View {
     
     @EnvironmentObject private var nameAndScore: NameAndScore
     @State var editScoreIsVisible: Bool = false
     @EnvironmentObject private var userData: UserData
+    //CoreData var
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
     
     var body: some View {
         NavigationView{
@@ -107,18 +109,17 @@ struct ContentView: View {
                 Spacer()
             // View History row
                     HStack {
-                    NavigationLink (destination: HistoryView()) {
-                        Text("View History")
-                        .fontWeight(.light)
-                        .font(.system(size:15))
+                        NavigationLink (destination: HistoryView()) {
+                            Text("View History")
+                                .fontWeight(.light)
+                                .font(.system(size:15))
+                        }
+                        .padding()
+                        Spacer()
                     }
-                    .padding()
                     Spacer()
-                    }
-            
-                Spacer()
                 }
-                }
+            }
             }} }
     
     func updateData () {
@@ -135,7 +136,6 @@ struct ContentView_Previews: PreviewProvider {
         }
         .environmentObject(NameAndScore())
         .environmentObject(UserData())
-        .environmentObject(HistoryStore())
     }
 }
 

@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import CoreData
 
 
 struct AddScoreView: View {
@@ -20,20 +21,20 @@ struct AddScoreView: View {
     @State var showAddAlert = false
     var names = ["Destiny", "Isaac"]
     
-    @EnvironmentObject var historyStore: HistoryStore
-    
     @EnvironmentObject var nameAndScore: NameAndScore
+    
+    //CoreData var
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    //CoreData section
-    @Environment(\.managedObjectContext) var moc
-
+    
     var btnBack : some View { Button(action: {
         self.presentationMode.wrappedValue.dismiss()
-        }) {
-            HStack {
-                Text("Go back")
-                
-            }
+    }) {
+        HStack {
+            Text("Go back")
+        }
         }
     }
     
@@ -46,13 +47,13 @@ struct AddScoreView: View {
                     Text("Pick a name")
                     , content: {
                         ForEach(0 ..< names.count) {
-                                      Text(self.names[$0])
-                                   }
-
+                            Text(self.names[$0])
+                        }
+                        
                 }).pickerStyle(SegmentedPickerStyle())
-                .padding(.trailing, 35)
-                .padding(.leading, 35)
-              //  Spacer()
+                    .padding(.trailing, 35)
+                    .padding(.leading, 35)
+
                 TextField("Score to add", text: $scoreAdded)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
@@ -64,10 +65,9 @@ struct AddScoreView: View {
                     .keyboardType(.numberPad)
                     .padding(.trailing, 35)
                     .padding(.leading, 35)
-
                 
                 Spacer()
-
+                
                 HStack {
                     Spacer()
                     Button(action: {
@@ -75,7 +75,7 @@ struct AddScoreView: View {
                         self.presentationMode.wrappedValue.dismiss() 
                     }) {
                         Text("Cancel")
-
+                        
                     }
                     Spacer()
                     
@@ -94,45 +94,43 @@ struct AddScoreView: View {
                         if Int(self.scoreAdded) == 1 {
                             self.pointGrammar = "point"
                         }
-                        print("Dscore is \(self.nameAndScore.DestinyScore), IScore is \(self.nameAndScore.IsaacScore)")
-                        /// Add history list function
-                        self.historyStore.historys.append(
-                            History(name: self.selectedNameString, addedScore: self.scoreAdded, reason: self.reason))
                         
-//
-//
-//                        let record = Record(context: self.moc)
-//                            record.id = UUID()
-//                            record.name = self.selectedNameString
-//                            record.addedScore = self.scoreAdded
-//                            record.reason = self.reason
-//                            try? self.moc.save()
-                        
-                        
+                        ///CoreData save
+                        let record = Record(context: self.managedObjectContext)
+                            record.name = self.selectedNameString
+                            record.score = self.scoreAdded
+                            record.reason = self.reason
+                            
+                        do {
+                            try self.managedObjectContext.save()
+                        } catch{
+                            print(error)
+                        }
+                    
                     }) {
                         Text("Add")
                     }
                     .disabled(scoreAdded.isEmpty)
                     .disabled(Double(scoreAdded)  == nil)
                     .alert(isPresented: $showAddAlert) { () ->
-                                   Alert in
+                        Alert in
                         return Alert(title: Text("Score added!"), message: Text("You added \(self.scoreAdded) \(self.pointGrammar) to \(self.selectedNameString)"), dismissButton: Alert.Button.default(Text("Ok"))
-                         // this part was learned from the RayRay class
+                            // this part was learned from the RayRay class
                         {self.presentationMode.wrappedValue.dismiss() }
-                            )
-                                   }
+                        )
+                    }
                     Spacer()
                 }
                 Spacer()
-                .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading: btnBack)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: btnBack)
                 Spacer()
             }
         }
         
     }
 }
-    
+
 
 struct AddScoreView_Previews: PreviewProvider {
     static var previews: some View {
