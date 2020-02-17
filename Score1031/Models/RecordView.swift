@@ -12,6 +12,8 @@ struct RecordView: View {
     var name: String = ""
     var score: String = ""
     var reason: String = ""
+    var entryTime: String = ""
+    
     
     var body: some View {
         HStack{
@@ -27,7 +29,8 @@ struct RecordView: View {
             VStack(alignment: .trailing){
                 Text(score)
                     .font(.headline)
-                
+                Text(entryTime)
+                    .font(.caption)
                 Text("")
             }
             Spacer()

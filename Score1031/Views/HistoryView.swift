@@ -6,7 +6,9 @@
 //  Copyright © 2020 HULUCave. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
+import Combine
 import CoreData
 
 struct HistoryView: View {
@@ -14,15 +16,19 @@ struct HistoryView: View {
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
-   // @State private var record = ""
-
     
     var body: some View {
         NavigationView {
             List {
                 ForEach(self.records) {record in
-                    RecordView(name: record.name!, score: record.score!, reason: record.reason!)
-                }
+                    RecordView(name: record.name!, score: record.score!, reason: record.reason!, entryTime: record.entryTimeString!)
+                  }
+                .onDelete { indexSet in
+                    for index in indexSet {
+                        self.managedObjectContext.delete(self.records[index])
+                        try? self.managedObjectContext.save()
+                    }}
+                    
 
             }
         }

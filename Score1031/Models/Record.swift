@@ -13,15 +13,19 @@ public class Record:NSManagedObject, Identifiable {
     @NSManaged public var name: String?
     @NSManaged public var score: String?
     @NSManaged public var reason: String?
+    @NSManaged public var entryTime: Date?
+    @NSManaged public var entryTimeString: String?
+    
 }
 
 extension Record {
     static func getAllRecords() -> NSFetchRequest<Record> {
         let request:NSFetchRequest<Record> = Record.fetchRequest() as! NSFetchRequest<Record>
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "entryTime", ascending: false)
         request.sortDescriptors = [sortDescriptor]
         
         return request
     }
+    
 }
 

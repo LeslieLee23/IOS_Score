@@ -118,6 +118,27 @@ struct ContentView: View {
                         Spacer()
                     }
                     Spacer()
+//                    HStack {
+                        
+//                        Button(action: {
+//                            let fetchRequest = NSFetchRequest<Record>(entityName: "Score1031")
+//
+//                            do {
+//                                let records = try managedObjectContext.execute(fetchRequest) as! [NSManagedObject]
+//                                for record in records {
+//                                    self.managedObjectContext.delete(record)
+//                                }
+//                                try self.managedObjectContext.save()
+//
+//                            } catch {
+//                                print("Error")
+//                            }
+//
+//                        })
+//                        {
+//                            Text("Clear Data")
+//                        }
+//                    }
                 }
             }
             }} }

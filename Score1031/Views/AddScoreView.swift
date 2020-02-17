@@ -100,7 +100,14 @@ struct AddScoreView: View {
                             record.name = self.selectedNameString
                             record.score = self.scoreAdded
                             record.reason = self.reason
-                            
+
+                        let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "MMM d, yyyy HH:mm:ss"
+                            record.entryTimeString = dateFormatter.string(from: Date())
+                            record.entryTime = Date()
+                        
+                        print("*&^*^NOW THE TIME IS \(String(describing: record.entryTime))")
+                        
                         do {
                             try self.managedObjectContext.save()
                         } catch{
@@ -116,7 +123,7 @@ struct AddScoreView: View {
                         Alert in
                         return Alert(title: Text("Score added!"), message: Text("You added \(self.scoreAdded) \(self.pointGrammar) to \(self.selectedNameString)"), dismissButton: Alert.Button.default(Text("Ok"))
                             // this part was learned from the RayRay class
-                        {self.presentationMode.wrappedValue.dismiss() }
+                    {self.presentationMode.wrappedValue.dismiss() }
                         )
                     }
                     Spacer()
