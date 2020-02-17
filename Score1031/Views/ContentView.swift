@@ -118,27 +118,32 @@ struct ContentView: View {
                         Spacer()
                     }
                     Spacer()
-//                    HStack {
+                    HStack {
                         
-//                        Button(action: {
-//                            let fetchRequest = NSFetchRequest<Record>(entityName: "Score1031")
-//
-//                            do {
-//                                let records = try managedObjectContext.execute(fetchRequest) as! [NSManagedObject]
-//                                for record in records {
-//                                    self.managedObjectContext.delete(record)
-//                                }
-//                                try self.managedObjectContext.save()
-//
-//                            } catch {
-//                                print("Error")
-//                            }
-//
-//                        })
-//                        {
-//                            Text("Clear Data")
-//                        }
-//                    }
+                        Button(action: {
+                            self.nameAndScore.IsaacScore = 0
+                            self.nameAndScore.DestinyScore = 0
+                        //Delete all Core Data rows
+                        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Record")
+                        fetchRequest.includesPropertyValues = false
+                        
+                        do {
+                            let items = try self.managedObjectContext.fetch(fetchRequest) as! [NSManagedObject]
+                            for item in items {
+                                self.managedObjectContext.delete(item)
+                            }
+                            try self.managedObjectContext.save()
+                        } catch let error {
+                            print("Detele all data in Record error :", error)
+                        }
+                            
+                            
+                            
+                        })
+                        {
+                            Text("Start Over")
+                        }
+                    }
                 }
             }
             }} }
