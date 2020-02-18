@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         .environment(\.managedObjectContext,managedObjectContext)
             .environmentObject(NameAndScore())
             .environmentObject(UserData())
-
+            .environmentObject(AddEidtChoice())
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)

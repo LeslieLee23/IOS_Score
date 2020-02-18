@@ -13,8 +13,9 @@ import CoreData
 struct ContentView: View {
     
     @EnvironmentObject private var nameAndScore: NameAndScore
-    @State var editScoreIsVisible: Bool = false
     @EnvironmentObject private var userData: UserData
+    @EnvironmentObject private var addEidtChoice: AddEidtChoice
+    
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
@@ -93,15 +94,19 @@ struct ContentView: View {
             Spacer()
             //Edit Score Button row
            VStack {
-               NavigationLink (destination: EditScoreView()) {
+            NavigationLink (destination: AddScoreView()) {
                    Text("Edit Score!")
                    .fontWeight(.semibold)
                }
                 .frame(width: 89, height: 8, alignment: .center)
                 .padding()
-                    .foregroundColor(.white)
-                    .background(LinearGradient(gradient: Gradient(colors: [Color("destinygreen"), Color("isaacblue")]), startPoint: .leading, endPoint: .trailing))
+                .foregroundColor(.white)
+                .background(LinearGradient(gradient: Gradient(colors: [Color("destinygreen"), Color("isaacblue")]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(13)
+            .simultaneousGesture(TapGesture().onEnded {
+                print("Hey Hey Yo Yo")
+                self.addEidtChoice.addViewSelected = false
+            })
 
                }
                 VStack {
@@ -136,8 +141,6 @@ struct ContentView: View {
                         } catch let error {
                             print("Detele all data in Record error :", error)
                         }
-                            
-                            
                             
                         })
                         {

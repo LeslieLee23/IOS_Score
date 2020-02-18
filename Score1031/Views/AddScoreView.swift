@@ -13,21 +13,22 @@ import CoreData
 
 
 struct AddScoreView: View {
-    @State var scoreAdded = ""
+    @State var scoreEdited = ""
     @State var reason = ""
     @State var selectedName = 0
     @State var selectedNameString = ""
     @State var pointGrammar = "points"
-    @State var showAddAlert = false
+    @State var showAlert = false
     var names = ["Destiny", "Isaac"]
     
     @EnvironmentObject var nameAndScore: NameAndScore
+    @EnvironmentObject var addEidtChoice: AddEidtChoice
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var btnBack : some View { Button(action: {
         self.presentationMode.wrappedValue.dismiss()
@@ -53,12 +54,19 @@ struct AddScoreView: View {
                 }).pickerStyle(SegmentedPickerStyle())
                     .padding(.trailing, 35)
                     .padding(.leading, 35)
-
-                TextField("Score to add", text: $scoreAdded)
+                if addEidtChoice.addViewSelected == true {
+                TextField("Score to add", text: $scoreEdited)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
                     .padding(.trailing, 35)
                     .padding(.leading, 35)
+                } else {
+                 TextField("New Score", text: $scoreEdited)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                    .padding(.trailing, 35)
+                    .padding(.leading, 35)
+                }
                 
                 TextField("What for?", text: $reason)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -80,25 +88,39 @@ struct AddScoreView: View {
                     Spacer()
                     
                     Button(action: {
-                        self.showAddAlert = true
-                        if Int(self.scoreAdded) == nil {
+                        self.showAlert = true
+                        
+                    if Int(self.scoreEdited) == nil {
                         }
-                        else if self.selectedName == 0 {
-                            self.nameAndScore.DestinyScore += Int(self.scoreAdded)!
+                        
+                    if self.addEidtChoice.addViewSelected == true {
+                        if self.selectedName == 0 {
+                            self.nameAndScore.DestinyScore += Int(self.scoreEdited)!
                             self.selectedNameString = "Destiny"
                         }
                         else if self.selectedName == 1 {
-                            self.nameAndScore.IsaacScore += Int(self.scoreAdded)!
+                            self.nameAndScore.IsaacScore += Int(self.scoreEdited)!
                             self.selectedNameString = "Isaac"
                         }
-                        if Int(self.scoreAdded) == 1 {
-                            self.pointGrammar = "point"
+                    } else {
+                        if self.selectedName == 0 {
+                            self.nameAndScore.DestinyScore = Int(self.scoreEdited)!
+                            self.selectedNameString = "Destiny"
                         }
+                        else if self.selectedName == 1 {
+                            self.nameAndScore.IsaacScore = Int(self.scoreEdited)!
+ 
+                            self.selectedNameString = "Isaac"
+                        }
+                    }
+                    if Int(self.scoreEdited) == 1 {
+                        self.pointGrammar = "point"
+                    }
                         
                         ///CoreData save
                         let record = Record(context: self.managedObjectContext)
                             record.name = self.selectedNameString
-                            record.score = self.scoreAdded
+                            record.score = self.scoreEdited
                             record.reason = self.reason
 
                         let dateFormatter = DateFormatter()
@@ -115,16 +137,29 @@ struct AddScoreView: View {
                         }
                     
                     }) {
+                        if addEidtChoice.addViewSelected == true {
                         Text("Add")
+                        }
+                        else {
+                        Text("Confirm")
+                        }
                     }
-                    .disabled(scoreAdded.isEmpty)
-                    .disabled(Double(scoreAdded)  == nil)
-                    .alert(isPresented: $showAddAlert) { () ->
+                    .disabled(scoreEdited.isEmpty)
+                    .disabled(Double(scoreEdited)  == nil)
+                    
+                    .alert(isPresented: $showAlert) { () ->
                         Alert in
-                        return Alert(title: Text("Score added!"), message: Text("You added \(self.scoreAdded) \(self.pointGrammar) to \(self.selectedNameString)"), dismissButton: Alert.Button.default(Text("Ok"))
+                        if self.addEidtChoice.addViewSelected == true {
+                        return Alert(title: Text("Score added!"), message: Text("You added \(self.scoreEdited) \(self.pointGrammar) to \(self.selectedNameString)"), dismissButton: Alert.Button.default(Text("Ok"))
+                            
                             // this part was learned from the RayRay class
-                    {self.presentationMode.wrappedValue.dismiss() }
+                           {self.presentationMode.wrappedValue.dismiss() }
                         )
+                        } else {
+                            return Alert(title: Text("Score edited!"), message: Text("You edited \(self.selectedNameString)'s score to \(self.scoreEdited)"), dismissButton: Alert.Button.default(Text("Ok"))
+                            {self.presentationMode.wrappedValue.dismiss() }
+                            )
+                        }
                     }
                     Spacer()
                 }
