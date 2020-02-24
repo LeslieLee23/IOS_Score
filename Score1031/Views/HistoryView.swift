@@ -16,8 +16,10 @@ struct HistoryView: View {
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
-    
+   
+
     var body: some View {
+        
         NavigationView {
             List {
                 ForEach(self.records) {record in

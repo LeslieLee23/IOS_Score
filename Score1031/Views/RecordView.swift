@@ -14,26 +14,31 @@ struct RecordView: View {
     var reason: String = ""
     var entryTime: String = ""
     
-    
     var body: some View {
-        HStack{
-            Spacer()
+
+        HStack(){
             VStack(alignment: .leading){
-            Text(name)
-              .font(.headline)
-            Text(reason)
-              .font(.caption)
             
-            }
-            Spacer()
-            VStack(alignment: .trailing){
-                Text(score)
-                    .font(.headline)
+            Text(name)
+                .font(.headline)
+            Text(score)
+                .font(.headline)
+                .foregroundColor(score.first == "-" ? .red : .green)
+                }
+            .frame(width:90,height: 45, alignment: .leading)
+           // .border(Color.purple)
+            
+           
+            VStack(alignment: .leading){
+                Text(reason)
+                    .font(.caption)
+                    .multilineTextAlignment(.leading)
                 Text(entryTime)
                     .font(.caption)
-                Text("")
             }
-            Spacer()
+            .frame(width:210, height: 45, alignment: .leading)
+          //  .border(Color.purple)
+        
         }
     }
 }

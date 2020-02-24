@@ -120,11 +120,17 @@ struct AddScoreView: View {
                         ///CoreData save
                         let record = Record(context: self.managedObjectContext)
                             record.name = self.selectedNameString
+                        if self.scoreEdited.first == "-" || self.scoreEdited == "0" {
                             record.score = self.scoreEdited
+                        } else {
+                            record.score = "+\(self.scoreEdited)"
+                        }
                             record.reason = self.reason
 
                         let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "MMM d, yyyy HH:mm:ss"
+                            dateFormatter.dateFormat = "MMM d, yyyy HH:mm a"
+                            dateFormatter.amSymbol = "AM"
+                            dateFormatter.pmSymbol = "PM"
                             record.entryTimeString = dateFormatter.string(from: Date())
                             record.entryTime = Date()
                         
