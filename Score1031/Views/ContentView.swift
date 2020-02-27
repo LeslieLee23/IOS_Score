@@ -60,9 +60,7 @@ struct ContentView: View {
                         .font(.system(size: 25))
                     Spacer()
                 }
-                //Name row
-                
-                
+            //Name row
             }
             VStack {
                 Spacer()
@@ -114,7 +112,8 @@ struct ContentView: View {
                 Spacer()
             // View History row
                     HStack {
-                        NavigationLink (destination: HistoryView()) {
+                        NavigationLink (destination: HistoryView())
+                        {
                             Text("View History")
                                 .fontWeight(.light)
                                 .font(.system(size:15))
@@ -150,10 +149,7 @@ struct ContentView: View {
                 }
             }
             }} }
-    
-    func updateData () {
-        
-    }
+
 
 
 struct ContentView_Previews: PreviewProvider {

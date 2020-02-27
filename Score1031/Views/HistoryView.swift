@@ -16,30 +16,37 @@ struct HistoryView: View {
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
-   
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
 
     var body: some View {
         
         NavigationView {
             List {
                 ForEach(self.records) {record in
-                    RecordView(name: record.name!, score: record.score!, reason: record.reason!, entryTime: record.entryTimeString!)
-                  }
+                    NavigationLink(
+                        destination: HistoryDetailView(record: record)) {
+                        RecordView(name: record.name!, score: record.score!, reason: record.reason!, entryTime: record.entryTimeString!)
+                    }
+                    
+                }
                 .onDelete { indexSet in
                     for index in indexSet {
                         self.managedObjectContext.delete(self.records[index])
                         try? self.managedObjectContext.save()
                     }}
-                    
 
+                .navigationBarTitle(Text("Score Change History"))
             }
+
         }
-    .navigationBarTitle(Text("Score Change History"))
+    
     }
-}
+
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
         HistoryView()
     }
+}
 }

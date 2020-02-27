@@ -126,6 +126,8 @@ struct AddScoreView: View {
                             record.score = "+\(self.scoreEdited)"
                         }
                             record.reason = self.reason
+                            record.dnewscore = String(self.nameAndScore.DestinyScore)
+                            record.inewscore = String(self.nameAndScore.IsaacScore)
 
                         let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "MMM d, yyyy HH:mm a"
