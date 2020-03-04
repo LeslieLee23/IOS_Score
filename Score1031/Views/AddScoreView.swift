@@ -19,8 +19,6 @@ struct AddScoreView: View {
     @State var selectedNameString = ""
     @State var pointGrammar = "points"
     @State var showAlert = false
-    var names = ["Destiny", "Isaac"]
-    
     @EnvironmentObject var nameAndScore: NameAndScore
     @EnvironmentObject var addEidtChoice: AddEidtChoice
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -28,7 +26,11 @@ struct AddScoreView: View {
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
+    var names = [String]()
     
+//    init () {
+//        self.names  = ["\(nameAndScore.playerOneName ?? "P1")","\(nameAndScore.playerTwoName ?? "P2")"]
+//    }
     
     var btnBack : some View { Button(action: {
         self.presentationMode.wrappedValue.dismiss()
@@ -70,7 +72,6 @@ struct AddScoreView: View {
                 
                 TextField("What for?", text: $reason)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
                     .padding(.trailing, 35)
                     .padding(.leading, 35)
                 

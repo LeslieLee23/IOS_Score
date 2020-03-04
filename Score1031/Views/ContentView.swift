@@ -15,10 +15,11 @@ struct ContentView: View {
     @EnvironmentObject private var nameAndScore: NameAndScore
     @EnvironmentObject private var userData: UserData
     @EnvironmentObject private var addEidtChoice: AddEidtChoice
-    
+
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
+    @State var names = [String]()
     
     var body: some View {
         NavigationView{
@@ -66,10 +67,10 @@ struct ContentView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Text("\(self.userData.showEmoji ? userData.dName[1].name : userData.dName[0].name)")
+                    Text("\((self.userData.showEmoji ? self.nameAndScore.playerOneEmoji! : self.nameAndScore.playerOneName!) ?? "")")
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
-                    Text("\(self.userData.showEmoji ? userData.iName[1].name : userData.iName[0].name)")
+                    Text("\((self.userData.showEmoji ? self.nameAndScore.playerTwoEmoji! : self.nameAndScore.playerTwoName!) ?? "")")
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
                 }
@@ -78,7 +79,7 @@ struct ContentView: View {
             }
             //Add Score Button row
             VStack {
-                NavigationLink (destination: AddScoreView()) {
+                NavigationLink (destination: AddScoreView(names: names)) {
                     Text("Add Score!")
                         .fontWeight(.semibold)
                 }
@@ -87,12 +88,18 @@ struct ContentView: View {
                 .foregroundColor(.white)
                 .background(LinearGradient(gradient: Gradient(colors: [Color("isaacblue"), Color("destinygreen")]), startPoint: .leading, endPoint: .trailing))
             .cornerRadius(13)
+            .simultaneousGesture(TapGesture().onEnded {
+                
+                self.names  = ["\(self.nameAndScore.playerOneName ?? "P1")","\(self.nameAndScore.playerTwoName ?? "P2")"]
+                print("\(self.names[1])")
+            })
+
                 }
             Spacer()
             Spacer()
             //Edit Score Button row
            VStack {
-            NavigationLink (destination: AddScoreView()) {
+            NavigationLink (destination: AddScoreView(names: names)) {
                    Text("Edit Score!")
                    .fontWeight(.semibold)
                }
@@ -104,14 +111,18 @@ struct ContentView: View {
             .simultaneousGesture(TapGesture().onEnded {
                 print("Hey Hey Yo Yo")
                 self.addEidtChoice.addViewSelected = false
+                self.names  = ["\(self.nameAndScore.playerOneName ?? "P1")","\(self.nameAndScore.playerTwoName ?? "P2")"]
             })
 
                }
                 VStack {
             
                 Spacer()
+                Spacer()
             // View History row
-                    HStack {
+                    
+                HStack {
+                    VStack {
                         NavigationLink (destination: HistoryView())
                         {
                             Text("View History")
@@ -121,6 +132,19 @@ struct ContentView: View {
                         .padding()
                         Spacer()
                     }
+                    Spacer()
+                    VStack {
+                        NavigationLink (destination: ChangePlayerView())
+                        {
+                            Text("Change Players")
+                                .fontWeight(.light)
+                                .font(.system(size:15))
+                        }
+                        .padding()
+                        Spacer()
+                    }
+                }
+                    
                     Spacer()
                     HStack {
                         

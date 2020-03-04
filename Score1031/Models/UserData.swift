@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 
 class UserData: ObservableObject {
+
     @Published var showEmoji: Bool = UserDefaults.standard.bool(forKey: "showEmoji") {
         didSet {
             UserDefaults.standard.set(self.showEmoji, forKey: "showEmoji")

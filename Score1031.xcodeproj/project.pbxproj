@@ -20,6 +20,7 @@
 		F53BDFDC236B44CF00C3E203 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F53BDFDA236B44CF00C3E203 /* LaunchScreen.storyboard */; };
 		F53BDFE42371E48500C3E203 /* AddScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53BDFE32371E48500C3E203 /* AddScoreView.swift */; };
 		F53BE01B2384482700C3E203 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53BE01A2384482700C3E203 /* UserData.swift */; };
+		F55E8EF1240D7F6200B6CD21 /* ChangePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E8EF0240D7F6200B6CD21 /* ChangePlayerView.swift */; };
 		F57BF4012404940D00141AF8 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57BF4002404940D00141AF8 /* HistoryDetailView.swift */; };
 		F5C95EA623FB4EB500D46C7A /* AddEditChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C95EA523FB4EB500D46C7A /* AddEditChoice.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		F53BDFDD236B44CF00C3E203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F53BDFE32371E48500C3E203 /* AddScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScoreView.swift; sourceTree = "<group>"; };
 		F53BE01A2384482700C3E203 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		F55E8EF0240D7F6200B6CD21 /* ChangePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePlayerView.swift; sourceTree = "<group>"; };
 		F57BF4002404940D00141AF8 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
 		F5C95EA523FB4EB500D46C7A /* AddEditChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditChoice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +74,7 @@
 				F53BDFD3236B44CC00C3E203 /* ContentView.swift */,
 				F51C7A3923D569C500540B25 /* HistoryView.swift */,
 				F53BDFE32371E48500C3E203 /* AddScoreView.swift */,
+				F55E8EF0240D7F6200B6CD21 /* ChangePlayerView.swift */,
 				F51C7A3123C78B1700540B25 /* RecordView.swift */,
 				F57BF4002404940D00141AF8 /* HistoryDetailView.swift */,
 			);
@@ -212,6 +215,7 @@
 				F51C7A3623D4EB6300540B25 /* NameAndScore.swift in Sources */,
 				F5C95EA623FB4EB500D46C7A /* AddEditChoice.swift in Sources */,
 				F51C7A3223C78B1700540B25 /* RecordView.swift in Sources */,
+				F55E8EF1240D7F6200B6CD21 /* ChangePlayerView.swift in Sources */,
 				F53BDFE42371E48500C3E203 /* AddScoreView.swift in Sources */,
 				F51C7A3A23D569C500540B25 /* HistoryView.swift in Sources */,
 				F53BDFD2236B44CC00C3E203 /* SceneDelegate.swift in Sources */,
