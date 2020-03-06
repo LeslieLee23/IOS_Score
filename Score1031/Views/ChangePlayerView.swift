@@ -103,22 +103,6 @@ struct ChangePlayerView: View {
             }
         Spacer()
         Spacer()
-        HStack{
-            Spacer()
-            Button(action: {
-                self.showAlert2 = true
-                           
-            }) {
-                Text("Show name info")
-            }
-            .alert(isPresented: $showAlert2) { () ->
-                Alert in
-                return Alert(title: Text("Player info report"), message: Text("Player one: \(self.nameAndScore.playerOneName ?? ""), emoji: \(self.nameAndScore.playerOneEmoji ?? ""). Player two: \(self.nameAndScore.playerTwoName ?? ""), emoji: \(self.nameAndScore.playerTwoEmoji ?? "")."), dismissButton: Alert.Button.default(Text("Ok"))
-                    {self.presentationMode.wrappedValue.dismiss() }
-                    )
-                
-            }
-            }
         }
     }
 }

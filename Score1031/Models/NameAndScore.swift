@@ -4,14 +4,14 @@ import SwiftUI
 import Combine
 
 final class NameAndScore: ObservableObject {
-    @Published var DestinyScore: Int = UserDefaults.standard.integer(forKey: "DScore") {
+    @Published var PlayerOneScore: Int = UserDefaults.standard.integer(forKey: "DScore") {
         didSet {
-            UserDefaults.standard.set(self.DestinyScore, forKey: "DScore")
+            UserDefaults.standard.set(self.PlayerOneScore, forKey: "DScore")
         }
     }
-    @Published var IsaacScore: Int = UserDefaults.standard.integer(forKey: "IScore") {
+    @Published var PlayerTwoScore: Int = UserDefaults.standard.integer(forKey: "IScore") {
         didSet {
-            UserDefaults.standard.set(self.IsaacScore, forKey: "IScore")
+            UserDefaults.standard.set(self.PlayerTwoScore, forKey: "IScore")
         }
     }
     @Published var playerOneName = UserDefaults.standard.string(forKey: "OneName") {

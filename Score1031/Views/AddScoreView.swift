@@ -22,15 +22,12 @@ struct AddScoreView: View {
     @EnvironmentObject var nameAndScore: NameAndScore
     @EnvironmentObject var addEidtChoice: AddEidtChoice
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
+
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
     var names = [String]()
-    
-//    init () {
-//        self.names  = ["\(nameAndScore.playerOneName ?? "P1")","\(nameAndScore.playerTwoName ?? "P2")"]
-//    }
+    var oldscore = [String]()
     
     var btnBack : some View { Button(action: {
         self.presentationMode.wrappedValue.dismiss()
@@ -96,22 +93,22 @@ struct AddScoreView: View {
                         
                     if self.addEidtChoice.addViewSelected == true {
                         if self.selectedName == 0 {
-                            self.nameAndScore.DestinyScore += Int(self.scoreEdited)!
-                            self.selectedNameString = "Destiny"
+                            self.nameAndScore.PlayerOneScore += Int(self.scoreEdited)!
+                            self.selectedNameString = self.nameAndScore.playerOneName!
                         }
                         else if self.selectedName == 1 {
-                            self.nameAndScore.IsaacScore += Int(self.scoreEdited)!
-                            self.selectedNameString = "Isaac"
+                            self.nameAndScore.PlayerTwoScore += Int(self.scoreEdited)!
+                            self.selectedNameString = self.nameAndScore.playerTwoName!
                         }
                     } else {
                         if self.selectedName == 0 {
-                            self.nameAndScore.DestinyScore = Int(self.scoreEdited)!
-                            self.selectedNameString = "Destiny"
+                            self.nameAndScore.PlayerOneScore = Int(self.scoreEdited)!
+                            self.selectedNameString = self.nameAndScore.playerOneName!
                         }
                         else if self.selectedName == 1 {
-                            self.nameAndScore.IsaacScore = Int(self.scoreEdited)!
+                            self.nameAndScore.PlayerTwoScore = Int(self.scoreEdited)!
  
-                            self.selectedNameString = "Isaac"
+                            self.selectedNameString = self.nameAndScore.playerTwoName!
                         }
                     }
                     if Int(self.scoreEdited) == 1 {
@@ -121,23 +118,34 @@ struct AddScoreView: View {
                         ///CoreData save
                         let record = Record(context: self.managedObjectContext)
                             record.name = self.selectedNameString
+                            record.addEdit = self.addEidtChoice.addViewSelected
+                    if self.addEidtChoice.addViewSelected == true {
                         if self.scoreEdited.first == "-" || self.scoreEdited == "0" {
                             record.score = self.scoreEdited
                         } else {
                             record.score = "+\(self.scoreEdited)"
                         }
+                    } else {
+                        if self.selectedName == 0 {
+                            record.score = String(Int(self.nameAndScore.PlayerOneScore) - (Int(self.oldscore[0])!))
+                        } else {
+                            record.score = String(Int(self.nameAndScore.PlayerTwoScore) - (Int(self.oldscore[1])!))
+                        }
+                        if String(record.score!).first != "-" {
+                            record.score = "+\(record.score!)"
+                        }
+                        }
+                        
                             record.reason = self.reason
-                            record.dnewscore = String(self.nameAndScore.DestinyScore)
-                            record.inewscore = String(self.nameAndScore.IsaacScore)
-
+                            record.ponescore = String(self.nameAndScore.PlayerOneScore)
+                            record.ptwoscore = String(self.nameAndScore.PlayerTwoScore)
+                            record.addEdit = self.addEidtChoice.addViewSelected
                         let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "MMM d, yyyy HH:mm a"
                             dateFormatter.amSymbol = "AM"
                             dateFormatter.pmSymbol = "PM"
                             record.entryTimeString = dateFormatter.string(from: Date())
                             record.entryTime = Date()
-                        
-                        print("*&^*^NOW THE TIME IS \(String(describing: record.entryTime))")
                         
                         do {
                             try self.managedObjectContext.save()

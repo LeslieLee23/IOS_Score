@@ -20,6 +20,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
     @State var names = [String]()
+    @State var oldscore = [String]()
     
     var body: some View {
         NavigationView{
@@ -54,10 +55,10 @@ struct ContentView: View {
                 //Score row
                 HStack {
                     Spacer()
-                    Text("\(self.nameAndScore.DestinyScore)")
+                    Text("\(self.nameAndScore.PlayerOneScore)")
                         .font(.system(size: 25))
                     Spacer()
-                    Text("\(self.nameAndScore.IsaacScore)")
+                    Text("\(self.nameAndScore.PlayerTwoScore)")
                         .font(.system(size: 25))
                     Spacer()
                 }
@@ -67,10 +68,10 @@ struct ContentView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Text("\((self.userData.showEmoji ? self.nameAndScore.playerOneEmoji! : self.nameAndScore.playerOneName!) ?? "")")
+                    Text("\((self.userData.showEmoji ? self.nameAndScore.playerOneEmoji! : self.nameAndScore.playerOneName!) )")
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
-                    Text("\((self.userData.showEmoji ? self.nameAndScore.playerTwoEmoji! : self.nameAndScore.playerTwoName!) ?? "")")
+                    Text("\((self.userData.showEmoji ? self.nameAndScore.playerTwoEmoji! : self.nameAndScore.playerTwoName!) )")
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
                 }
@@ -79,7 +80,7 @@ struct ContentView: View {
             }
             //Add Score Button row
             VStack {
-                NavigationLink (destination: AddScoreView(names: names)) {
+                NavigationLink (destination: AddScoreView(names: names, oldscore: oldscore)) {
                     Text("Add Score!")
                         .fontWeight(.semibold)
                 }
@@ -89,9 +90,9 @@ struct ContentView: View {
                 .background(LinearGradient(gradient: Gradient(colors: [Color("isaacblue"), Color("destinygreen")]), startPoint: .leading, endPoint: .trailing))
             .cornerRadius(13)
             .simultaneousGesture(TapGesture().onEnded {
-                
-                self.names  = ["\(self.nameAndScore.playerOneName ?? "P1")","\(self.nameAndScore.playerTwoName ?? "P2")"]
-                print("\(self.names[1])")
+                self.addEidtChoice.addViewSelected = true
+                self.names  = ["\(self.nameAndScore.playerOneEmoji!) \( self.nameAndScore.playerOneName!)","\( self.nameAndScore.playerTwoEmoji!) \( self.nameAndScore.playerTwoName!)"]
+                self.oldscore = ["\(self.nameAndScore.PlayerOneScore)", "\(self.nameAndScore.PlayerTwoScore)"]
             })
 
                 }
@@ -99,7 +100,7 @@ struct ContentView: View {
             Spacer()
             //Edit Score Button row
            VStack {
-            NavigationLink (destination: AddScoreView(names: names)) {
+            NavigationLink (destination: AddScoreView(names: names, oldscore: oldscore)) {
                    Text("Edit Score!")
                    .fontWeight(.semibold)
                }
@@ -109,9 +110,9 @@ struct ContentView: View {
                 .background(LinearGradient(gradient: Gradient(colors: [Color("destinygreen"), Color("isaacblue")]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(13)
             .simultaneousGesture(TapGesture().onEnded {
-                print("Hey Hey Yo Yo")
                 self.addEidtChoice.addViewSelected = false
-                self.names  = ["\(self.nameAndScore.playerOneName ?? "P1")","\(self.nameAndScore.playerTwoName ?? "P2")"]
+                self.names  = ["\(self.nameAndScore.playerOneEmoji!) \( self.nameAndScore.playerOneName!)","\( self.nameAndScore.playerTwoEmoji!) \( self.nameAndScore.playerTwoName!)"]
+                self.oldscore = ["\(self.nameAndScore.PlayerOneScore)", "\(self.nameAndScore.PlayerTwoScore)"]
             })
 
                }
@@ -149,8 +150,8 @@ struct ContentView: View {
                     HStack {
                         
                         Button(action: {
-                            self.nameAndScore.IsaacScore = 0
-                            self.nameAndScore.DestinyScore = 0
+                            self.nameAndScore.PlayerTwoScore = 0
+                            self.nameAndScore.PlayerOneScore = 0
                         //Delete all Core Data rows
                         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Record")
                         fetchRequest.includesPropertyValues = false

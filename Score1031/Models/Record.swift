@@ -15,9 +15,9 @@ public class Record:NSManagedObject, Identifiable {
     @NSManaged public var reason: String?
     @NSManaged public var entryTime: Date?
     @NSManaged public var entryTimeString: String?
-    @NSManaged public var dnewscore: String?
-    @NSManaged public var inewscore: String?
-    
+    @NSManaged public var ponescore: String?
+    @NSManaged public var ptwoscore: String?
+    @NSManaged public var addEdit: Bool
 }
 
 extension Record {

@@ -35,23 +35,23 @@ struct HistoryDetailView: View {
                     .fontWeight(.bold)
                 }
                 .padding(.leading)
-                if self.record.name == "Destiny" {
+                if self.record.name == self.nameAndScore.playerOneName {
                     HStack {
                     Spacer()
-                    Text("\(Int(self.record.dnewscore!)! - Int(self.record.score!)!)")
+                    Text("\(Int(self.record.ponescore!)! - Int(self.record.score!)!)")
                         .font(.system(size: 25))
                     Spacer()
-                    Text("\(self.record.inewscore!)")
+                    Text("\(self.record.ptwoscore!)")
                         .font(.system(size: 25))
                     Spacer()
                     }
                 } else {
                     HStack {
                     Spacer()
-                    Text("\(self.record.dnewscore!)")
+                    Text("\(self.record.ponescore!)")
                         .font(.system(size: 25))
                     Spacer()
-                    Text("\(Int(self.record.inewscore!)! - Int(self.record.score!)!)")
+                    Text("\(Int(self.record.ptwoscore!)! - Int(self.record.score!)!)")
                         .font(.system(size: 25))
                     Spacer()
                 }
@@ -59,10 +59,10 @@ struct HistoryDetailView: View {
                 
                 HStack {
                     Spacer()
-                    Text("\(self.userData.showEmoji ? userData.dName[1].name : userData.dName[0].name)")
+                    Text("\(self.userData.showEmoji ? self.nameAndScore.playerOneEmoji! : self.nameAndScore.playerOneName!)")
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
-                    Text("\(self.userData.showEmoji ? userData.iName[1].name : userData.iName[0].name)")
+                    Text("\(self.userData.showEmoji ? self.nameAndScore.playerTwoEmoji! : self.nameAndScore.playerTwoName!)")
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
                 }
@@ -74,20 +74,20 @@ struct HistoryDetailView: View {
                     .fontWeight(.bold)
                 HStack {
                     Spacer()
-                    Text("\(self.record.dnewscore!)")
+                    Text("\(self.record.ponescore!)")
                         .font(.system(size: 25))
                     Spacer()
-                    Text("\(self.record.inewscore!)")
+                    Text("\(self.record.ptwoscore!)")
                         .font(.system(size: 25))
                     Spacer()
                 }
                 
                 HStack {
                     Spacer()
-                    Text("\(self.userData.showEmoji ? userData.dName[1].name : userData.dName[0].name)")
+                    Text("\(self.userData.showEmoji ? self.nameAndScore.playerOneEmoji! : self.nameAndScore.playerOneName!)")
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
-                    Text("\(self.userData.showEmoji ? userData.iName[1].name : userData.iName[0].name)")
+                    Text("\(self.userData.showEmoji ? self.nameAndScore.playerTwoEmoji! : self.nameAndScore.playerTwoName!)")
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
                 }
