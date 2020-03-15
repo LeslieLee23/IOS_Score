@@ -37,5 +37,4 @@ final class NameAndScore: ObservableObject {
               UserDefaults.standard.set(self.playerTwoEmoji, forKey: "TwoEmoji")
           }
       }
-
 }

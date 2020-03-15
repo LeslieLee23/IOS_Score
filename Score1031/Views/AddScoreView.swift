@@ -21,6 +21,7 @@ struct AddScoreView: View {
     @State var showAlert = false
     @EnvironmentObject var nameAndScore: NameAndScore
     @EnvironmentObject var addEidtChoice: AddEidtChoice
+    @EnvironmentObject private var userData: UserData
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     //CoreData var
@@ -146,7 +147,7 @@ struct AddScoreView: View {
                             dateFormatter.pmSymbol = "PM"
                             record.entryTimeString = dateFormatter.string(from: Date())
                             record.entryTime = Date()
-                        
+                        record.playerID = self.userData.playerID!
                         do {
                             try self.managedObjectContext.save()
                         } catch{

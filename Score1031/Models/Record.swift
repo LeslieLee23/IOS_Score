@@ -18,6 +18,8 @@ public class Record:NSManagedObject, Identifiable {
     @NSManaged public var ponescore: String?
     @NSManaged public var ptwoscore: String?
     @NSManaged public var addEdit: Bool
+    @NSManaged public var playerID: String
+    @NSManaged public var player: Player?
 }
 
 extension Record {

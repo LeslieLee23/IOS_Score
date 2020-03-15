@@ -18,66 +18,67 @@ struct ChangePlayerView: View {
     @State var playerOneEmoji = ""
     @State var playerTwoName = ""
     @State var playerTwoEmoji = ""
+    @State var id = ""
     @State var showAlert = false
-    @State var showAlert2 = false
 
 
     @EnvironmentObject var nameAndScore: NameAndScore
     @EnvironmentObject var addEidtChoice: AddEidtChoice
+    @EnvironmentObject private var userData: UserData
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
 
-    class TestButton: UIButton, UIKeyInput {
-
-        var hasText: Bool = true
-
-        override var textInputContextIdentifier: String? { "" } // return non-nil to show the Emoji keyboard ¯\_(ツ)_/¯
-
-        func insertText(_ text: String) { print("\(text)") }
-
-        func deleteBackward() {}
-
-        override var canBecomeFirstResponder: Bool { return true }
-
-        override var canResignFirstResponder: Bool { return true }
-
-        override var textInputMode: UITextInputMode? {
-            for mode in UITextInputMode.activeInputModes {
-                if mode.primaryLanguage == "emoji" {
-                    return mode
-                }
-            }
-            return nil
-        }
-    }
     var body: some View {
         VStack{
         HStack{
-        TextField("playerOneName", text: $playerOneName)
+        Text("Enter name for player one:")
+        Spacer()
+        }
+        HStack{
+        TextField("Player One Name", text: $playerOneName)
+        .textFieldStyle(RoundedBorderTextFieldStyle())
+        .padding(.trailing, 35)
+        .padding(.leading, 35)
+            
+        }
+        HStack{
+        Text("Enter Emoji for player one:")
+        Spacer()
+        }
+        HStack{
+        TextField("Player One Emoji", text: $playerOneEmoji)
         .textFieldStyle(RoundedBorderTextFieldStyle())
         .padding(.trailing, 35)
         .padding(.leading, 35)
         }
         HStack{
-        TextField("playerOneEmoji", text: $playerOneEmoji)
+        Text("Enter name for player two:")
+        Spacer()
+        }
+        HStack{
+        TextField("Player Two Name", text: $playerTwoName)
         .textFieldStyle(RoundedBorderTextFieldStyle())
         .padding(.trailing, 35)
         .padding(.leading, 35)
         }
         HStack{
-        TextField("playerTwoName", text: $playerTwoName)
+        Text("Enter emoji for player two:")
+        Spacer()
+        }
+        HStack{
+        TextField("Player Two Emoji", text: $playerTwoEmoji)
         .textFieldStyle(RoundedBorderTextFieldStyle())
         .padding(.trailing, 35)
         .padding(.leading, 35)
         }
         HStack{
-        TextField("playerTwoEmoji", text: $playerTwoEmoji)
+        TextField("EnterID", text: $id)
         .textFieldStyle(RoundedBorderTextFieldStyle())
         .padding(.trailing, 35)
         .padding(.leading, 35)
         }
+        
         HStack{
             Spacer()
             Button(action: {
@@ -86,24 +87,46 @@ struct ChangePlayerView: View {
                 self.nameAndScore.playerTwoName = self.playerTwoName
                 self.nameAndScore.playerOneEmoji = self.playerOneEmoji
                 self.nameAndScore.playerTwoEmoji = self.playerTwoEmoji
-                          
-                           
+                self.nameAndScore.PlayerOneScore = 0
+                self.nameAndScore.PlayerTwoScore = 0
+                self.userData.playerID = self.id
+                //trying to save through two enities
+                let record = Record(context: self.managedObjectContext)
+                record.name = "\(self.playerOneName)+\(self.playerTwoName)"
+                record.addEdit = true
+                record.playerID = self.id
+                record.score = "NA"
+                record.reason = "New Palyers"
+                record.entryTime = Date()
+                record.entryTimeString = "Now"
+                record.ponescore = "0"
+                record.ptwoscore = "0"
+                record.player = Player(context: self.managedObjectContext)
+                record.player?.playerOneName = self.playerOneName
+                record.player?.playerTwoName = self.playerTwoName
+                record.player?.playerOneEmoji = self.playerOneEmoji
+                record.player?.playerTwoEmoji = self.playerTwoEmoji
+                record.player?.playerOneScore = 0
+                record.player?.playerTwoScore = 0
+                record.player?.playerID = self.id
             }) {
-                Text("Change Players")
+                Text("Add Players")
             }
             //.disabled($playerOneName.isEmpty)
                           // .disabled(Double(scoreEdited)  == nil)
             .alert(isPresented: $showAlert) { () ->
                 Alert in
-                return Alert(title: Text("Player Changed!"), message: Text("You changed player one to \(self.playerOneName), with emoji \(self.playerOneEmoji). You changed player two to  to \(self.playerTwoName), with emoji \(self.playerTwoEmoji)."), dismissButton: Alert.Button.default(Text("Ok"))
+                return Alert(title: Text("Player Changed!"), message: Text("You changed player one to \(self.playerOneName), with emoji \(self.playerOneEmoji). You changed player two to  to \(self.playerTwoName), with emoji \(self.playerTwoEmoji). And the playerID is \(self.userData.playerID!)"), dismissButton: Alert.Button.default(Text("Ok"))
                     {self.presentationMode.wrappedValue.dismiss() }
                     )
                 
             }
             }
-        Spacer()
-        Spacer()
+        
         }
+        .padding(.trailing, 35)
+        .padding(.leading, 35)
+
     }
 }
 

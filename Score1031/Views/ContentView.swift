@@ -31,11 +31,18 @@ struct ContentView: View {
                 VStack {
                     
                     HStack{
+//                        NavigationLink (destination: SelectPlayersView())
+//                        {
+//                            Text("Change Players")
+//                                .fontWeight(.light)
+//                                .font(.system(size:15))
+//                        }
                         Spacer()
                          Text("Emoji Mode")
                             .font(.system(size:15))
                     }
                     .padding(.trailing, 35)
+                    .padding(.leading, 35)
                     
                     HStack {
                         Spacer()
@@ -137,11 +144,26 @@ struct ContentView: View {
                     VStack {
                         NavigationLink (destination: ChangePlayerView())
                         {
-                            Text("Change Players")
+                            Text("Add Players")
                                 .fontWeight(.light)
                                 .font(.system(size:15))
                         }
                         .padding()
+                        .simultaneousGesture(TapGesture().onEnded {
+                            let player = Player(context: self.managedObjectContext)
+                            player.playerOneName = self.nameAndScore.playerOneName
+                            player.playerOneEmoji = self.nameAndScore.playerOneEmoji
+                            player.playerOneScore = Int16(self.nameAndScore.PlayerOneScore)
+                            player.playerTwoName = self.nameAndScore.playerTwoName
+                            player.playerTwoEmoji = self.nameAndScore.playerTwoEmoji
+                            player.playerTwoScore = Int16(self.nameAndScore.PlayerTwoScore)
+                            player.playerID = self.userData.playerID!
+                            do {
+                                try self.managedObjectContext.save()
+                                } catch{
+                                    print(error)
+                                }
+                            })
                         Spacer()
                     }
                 }

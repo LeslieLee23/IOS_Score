@@ -15,6 +15,7 @@ struct HistoryDetailView: View {
     @EnvironmentObject private var nameAndScore: NameAndScore
     @EnvironmentObject private var userData: UserData
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     var record: Record
     
     
@@ -22,17 +23,28 @@ struct HistoryDetailView: View {
         NavigationView{
         VStack {
             VStack(alignment: .leading) {
-                Text("\(self.record.score!) score to \(self.record.name!)")
                 Text("\(self.record.entryTimeString!)")
+                if record.addEdit == true {
+                    Text("\(self.record.score!) score for \(self.record.name!)")
+                } else {
+                    Text("\(self.record.name!)'s score were edited")
+                }
+                
             Spacer()
             }
             
             
             VStack {
                 HStack {
-                Text("Before:")
+                if record.addEdit == true {
+                Text("Before Score Add:")
                     .font(.headline)
                     .fontWeight(.bold)
+                } else {
+                Text("Before Score Edit:")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    }
                 }
                 .padding(.leading)
                 if self.record.name == self.nameAndScore.playerOneName {
@@ -69,9 +81,17 @@ struct HistoryDetailView: View {
             }
             Spacer()
             VStack {
-                Text("After:")
+                HStack {
+                if record.addEdit == true {
+                Text("After Score Add:")
                     .font(.headline)
                     .fontWeight(.bold)
+                } else {
+                Text("After Score Edit:")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    }
+                }
                 HStack {
                     Spacer()
                     Text("\(self.record.ponescore!)")
