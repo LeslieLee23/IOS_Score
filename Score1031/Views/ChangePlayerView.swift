@@ -92,7 +92,7 @@ struct ChangePlayerView: View {
                 let record = Record(context: self.managedObjectContext)
                 record.name = "\(self.playerOneName)+\(self.playerTwoName)"
                 record.score = "NA"
-                record.reason = "New Palyers"
+                record.reason = "New Palyers Added"
                 record.entryTime = Date()
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMM d, yyyy HH:mm a"
@@ -103,6 +103,8 @@ struct ChangePlayerView: View {
                 record.ptwoscore = "0"
                 record.addEdit = true
                 record.playerID = self.id
+                
+                record.player = Player(context: self.managedObjectContext)
             }) {
                 Text("Change Players")
             }

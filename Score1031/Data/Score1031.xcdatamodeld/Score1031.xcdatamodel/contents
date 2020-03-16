@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Player" representedClassName="Player" syncable="YES">
+        <attribute name="playerID" optional="YES" attributeType="String"/>
+        <attribute name="playerOneEmoji" optional="YES" attributeType="String"/>
+        <attribute name="playerOneName" optional="YES" attributeType="String"/>
+        <attribute name="playerOneScore" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="playerTwoEmoji" optional="YES" attributeType="String"/>
+        <attribute name="playerTwoName" optional="YES" attributeType="String"/>
+        <attribute name="playerTwoScore" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="record" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="player" inverseEntity="Record"/>
+    </entity>
     <entity name="Record" representedClassName=".Record" syncable="YES">
         <attribute name="addEdit" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="entryTime" optional="YES" attributeType="Date" defaultDateTimeInterval="603527880" usesScalarValueType="NO"/>
@@ -10,8 +20,10 @@
         <attribute name="ptwoscore" optional="YES" attributeType="String"/>
         <attribute name="reason" optional="YES" attributeType="String"/>
         <attribute name="score" optional="YES" attributeType="String"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="record" inverseEntity="Player"/>
     </entity>
     <elements>
-        <element name="Record" positionX="-54" positionY="-9" width="128" height="178"/>
+        <element name="Player" positionX="-45" positionY="72" width="128" height="163"/>
+        <element name="Record" positionX="-54" positionY="-9" width="128" height="193"/>
     </elements>
 </model>

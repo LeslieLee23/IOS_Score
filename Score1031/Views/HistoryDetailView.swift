@@ -12,42 +12,42 @@ import Combine
 import CoreData
 
 struct HistoryDetailView: View {
-    @EnvironmentObject private var nameAndScore: NameAndScore
-    @EnvironmentObject private var userData: UserData
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+     @EnvironmentObject private var nameAndScore: NameAndScore
+     @EnvironmentObject private var userData: UserData
+     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    var record: Record
-    
-    
-    var body: some View {
-        NavigationView{
-        VStack {
-            VStack(alignment: .leading) {
-                Text("\(self.record.entryTimeString!)")
-                if record.addEdit == true {
-                    Text("\(self.record.score!) score for \(self.record.name!)")
-                } else {
-                    Text("\(self.record.name!)'s score were edited")
-                }
-                
-            Spacer()
-            }
-            
-            
-            VStack {
-                HStack {
-                if record.addEdit == true {
-                Text("Before Score Add:")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                } else {
-                Text("Before Score Edit:")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    }
-                }
-                .padding(.leading)
-                if self.record.name == self.nameAndScore.playerOneName {
+     var record: Record
+
+
+     var body: some View {
+         NavigationView{
+         VStack {
+             VStack(alignment: .leading) {
+                 Text("\(self.record.entryTimeString!)")
+                 if record.addEdit == true {
+                     Text("\(self.record.score!) score for \(self.record.name!)")
+                 } else {
+                     Text("\(self.record.name!)'s score were edited")
+                 }
+
+             Spacer()
+             }
+
+
+             VStack {
+                 HStack {
+                 if record.addEdit == true {
+                 Text("Before Score Add:")
+                     .font(.headline)
+                     .fontWeight(.bold)
+                 } else {
+                 Text("Before Score Edit:")
+                     .font(.headline)
+                     .fontWeight(.bold)
+                     }
+                 }
+                 .padding(.leading)
+                 if self.record.name == self.nameAndScore.playerOneName {
                     HStack {
                     Spacer()
                     Text("\(Int(self.record.ponescore!)! - Int(self.record.score!)!)")
@@ -63,7 +63,7 @@ struct HistoryDetailView: View {
                     Text("\(self.record.ponescore!)")
                         .font(.system(size: 25))
                     Spacer()
-                    Text("\(Int(self.record.ptwoscore!)! - Int(self.record.score!)!)")
+                                                     Text("\(Int(self.record.ptwoscore!)! - Int(self.record.score!)!)")
                         .font(.system(size: 25))
                     Spacer()
                 }
@@ -78,23 +78,23 @@ struct HistoryDetailView: View {
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
                 }
-            }
-            Spacer()
-            VStack {
-                HStack {
-                if record.addEdit == true {
-                Text("After Score Add:")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                } else {
-                Text("After Score Edit:")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    }
-                }
-                HStack {
-                    Spacer()
-                    Text("\(self.record.ponescore!)")
+             }
+             Spacer()
+             VStack {
+                 HStack {
+                 if record.addEdit == true {
+                 Text("After Score Add:")
+                     .font(.headline)
+                     .fontWeight(.bold)
+                 } else {
+                 Text("After Score Edit:")
+                     .font(.headline)
+                     .fontWeight(.bold)
+                     }
+                 }
+                 HStack {
+                     Spacer()
+                     Text("\(self.record.ponescore!)")
                         .font(.system(size: 25))
                     Spacer()
                     Text("\(self.record.ptwoscore!)")
@@ -113,7 +113,6 @@ struct HistoryDetailView: View {
                 }
                 Spacer()
                 Spacer()
-
             }
             VStack {
                 Spacer()

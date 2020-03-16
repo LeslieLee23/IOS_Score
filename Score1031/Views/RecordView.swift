@@ -10,19 +10,20 @@ import SwiftUI
 
 struct RecordView: View {
     var name: String = ""
-    var score: String = ""
-    var reason: String = ""
-    var entryTime: String = ""
-    var playerID: String = ""
-    
-    var body: some View {
+     var score: String = ""
+     var reason: String = ""
+     var entryTime: String = ""
+     var playerID: String = ""
 
-        HStack(){
-            VStack(alignment: .leading){
-            Text(playerID)
-            Text(name)
-                .font(.headline)
-            Text(score)
+     var body: some View {
+
+         HStack(){
+             VStack(alignment: .leading){
+
+             Text(playerID)
+             Text(name)
+                 .font(.headline)
+             Text(score)
                 .font(.headline)
                 .foregroundColor(score.first == "-" ? .red : .green)
                 }

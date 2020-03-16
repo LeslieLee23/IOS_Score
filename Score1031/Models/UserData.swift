@@ -16,6 +16,7 @@ class UserData: ObservableObject {
             UserDefaults.standard.set(self.showEmoji, forKey: "showEmoji")
         }
     }
+    
     @Published var playerID = UserDefaults.standard.string(forKey: "playerID") {
         didSet {
             UserDefaults.standard.set(self.playerID, forKey: "playerID")

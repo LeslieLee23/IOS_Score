@@ -20,6 +20,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
     @State var names = [String]()
+    @State var oldscore = [String]()
     
     var body: some View {
         NavigationView{
@@ -79,7 +80,7 @@ struct ContentView: View {
             }
             //Add Score Button row
             VStack {
-                NavigationLink (destination: AddScoreView(names: names)) {
+                NavigationLink (destination: AddScoreView(names: names, oldscore: oldscore)) {
                     Text("Add Score!")
                         .fontWeight(.semibold)
                 }
@@ -89,9 +90,9 @@ struct ContentView: View {
                 .background(LinearGradient(gradient: Gradient(colors: [Color("isaacblue"), Color("destinygreen")]), startPoint: .leading, endPoint: .trailing))
             .cornerRadius(13)
             .simultaneousGesture(TapGesture().onEnded {
-                
-                self.names  = ["\(self.nameAndScore.playerOneName ?? "P1")","\(self.nameAndScore.playerTwoName ?? "P2")"]
-                print("\(self.names[1])")
+                self.addEidtChoice.addViewSelected = true
+                self.names  = ["\(self.nameAndScore.playerOneEmoji!) \( self.nameAndScore.playerOneName!)","\( self.nameAndScore.playerTwoEmoji!) \( self.nameAndScore.playerTwoName!)"]
+                self.oldscore = ["\(self.nameAndScore.PlayerOneScore)", "\(self.nameAndScore.PlayerTwoScore)"]
             })
 
                 }
@@ -99,7 +100,7 @@ struct ContentView: View {
             Spacer()
             //Edit Score Button row
            VStack {
-            NavigationLink (destination: AddScoreView(names: names)) {
+            NavigationLink (destination: AddScoreView(names: names, oldscore: oldscore)) {
                    Text("Edit Score!")
                    .fontWeight(.semibold)
                }
@@ -109,9 +110,9 @@ struct ContentView: View {
                 .background(LinearGradient(gradient: Gradient(colors: [Color("destinygreen"), Color("isaacblue")]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(13)
             .simultaneousGesture(TapGesture().onEnded {
-                print("Hey Hey Yo Yo")
                 self.addEidtChoice.addViewSelected = false
-                self.names  = ["\(self.nameAndScore.playerOneName ?? "P1")","\(self.nameAndScore.playerTwoName ?? "P2")"]
+                self.names  = ["\(self.nameAndScore.playerOneEmoji!) \( self.nameAndScore.playerOneName!)","\( self.nameAndScore.playerTwoEmoji!) \( self.nameAndScore.playerTwoName!)"]
+                self.oldscore = ["\(self.nameAndScore.PlayerOneScore)", "\(self.nameAndScore.PlayerTwoScore)"]
             })
 
                }
@@ -136,7 +137,7 @@ struct ContentView: View {
                     VStack {
                         NavigationLink (destination: ChangePlayerView())
                         {
-                            Text("Change Players")
+                            Text("Add Players")
                                 .fontWeight(.light)
                                 .font(.system(size:15))
                         }

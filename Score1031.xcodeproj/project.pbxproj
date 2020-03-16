@@ -22,8 +22,9 @@
 		F53BE01B2384482700C3E203 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53BE01A2384482700C3E203 /* UserData.swift */; };
 		F55E8EF1240D7F6200B6CD21 /* ChangePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E8EF0240D7F6200B6CD21 /* ChangePlayerView.swift */; };
 		F57BF4012404940D00141AF8 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57BF4002404940D00141AF8 /* HistoryDetailView.swift */; };
-		F5912924241746830071E1D3 /* SelectPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5912923241746830071E1D3 /* SelectPlayersView.swift */; };
-		F591293A241954200071E1D3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5912936241954200071E1D3 /* Player.swift */; };
+		F591294B241FD2540071E1D3 /* Player+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5912949241FD2540071E1D3 /* Player+CoreDataClass.swift */; };
+		F591294C241FD2540071E1D3 /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F591294A241FD2540071E1D3 /* Player+CoreDataProperties.swift */; };
+		F591294E241FE1C20071E1D3 /* SelectPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F591294D241FE1C20071E1D3 /* SelectPlayerView.swift */; };
 		F5C95EA623FB4EB500D46C7A /* AddEditChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C95EA523FB4EB500D46C7A /* AddEditChoice.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,8 +46,9 @@
 		F53BE01A2384482700C3E203 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		F55E8EF0240D7F6200B6CD21 /* ChangePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePlayerView.swift; sourceTree = "<group>"; };
 		F57BF4002404940D00141AF8 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
-		F5912923241746830071E1D3 /* SelectPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlayersView.swift; sourceTree = "<group>"; };
-		F5912936241954200071E1D3 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = SOURCE_ROOT; };
+		F5912949241FD2540071E1D3 /* Player+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		F591294A241FD2540071E1D3 /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		F591294D241FE1C20071E1D3 /* SelectPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlayerView.swift; sourceTree = "<group>"; };
 		F5C95EA523FB4EB500D46C7A /* AddEditChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditChoice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,7 +66,8 @@
 		F51C7A3023C78AED00540B25 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F5912936241954200071E1D3 /* Player.swift */,
+				F5912949241FD2540071E1D3 /* Player+CoreDataClass.swift */,
+				F591294A241FD2540071E1D3 /* Player+CoreDataProperties.swift */,
 				F51EE71D23F09EB80030B17C /* Record.swift */,
 				F53BE01A2384482700C3E203 /* UserData.swift */,
 				F51C7A3523D4EB6300540B25 /* NameAndScore.swift */,
@@ -82,7 +85,7 @@
 				F55E8EF0240D7F6200B6CD21 /* ChangePlayerView.swift */,
 				F51C7A3123C78B1700540B25 /* RecordView.swift */,
 				F57BF4002404940D00141AF8 /* HistoryDetailView.swift */,
-				F5912923241746830071E1D3 /* SelectPlayersView.swift */,
+				F591294D241FE1C20071E1D3 /* SelectPlayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,18 +219,19 @@
 			files = (
 				F53BE01B2384482700C3E203 /* UserData.swift in Sources */,
 				F51EE72223F12D9D0030B17C /* Score1031.xcdatamodeld in Sources */,
-				F591293A241954200071E1D3 /* Player.swift in Sources */,
 				F51EE71E23F09EB80030B17C /* Record.swift in Sources */,
 				F53BDFD0236B44CC00C3E203 /* AppDelegate.swift in Sources */,
 				F51C7A3623D4EB6300540B25 /* NameAndScore.swift in Sources */,
-				F5912924241746830071E1D3 /* SelectPlayersView.swift in Sources */,
 				F5C95EA623FB4EB500D46C7A /* AddEditChoice.swift in Sources */,
 				F51C7A3223C78B1700540B25 /* RecordView.swift in Sources */,
 				F55E8EF1240D7F6200B6CD21 /* ChangePlayerView.swift in Sources */,
 				F53BDFE42371E48500C3E203 /* AddScoreView.swift in Sources */,
+				F591294E241FE1C20071E1D3 /* SelectPlayerView.swift in Sources */,
 				F51C7A3A23D569C500540B25 /* HistoryView.swift in Sources */,
 				F53BDFD2236B44CC00C3E203 /* SceneDelegate.swift in Sources */,
+				F591294C241FD2540071E1D3 /* Player+CoreDataProperties.swift in Sources */,
 				F57BF4012404940D00141AF8 /* HistoryDetailView.swift in Sources */,
+				F591294B241FD2540071E1D3 /* Player+CoreDataClass.swift in Sources */,
 				F53BDFD4236B44CC00C3E203 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
