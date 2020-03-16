@@ -10,8 +10,6 @@ import Foundation
 import SwiftUI
 import Combine
 import CoreData
-
-
 struct AddScoreView: View {
     @State var scoreEdited = ""
     @State var reason = ""
@@ -24,7 +22,7 @@ struct AddScoreView: View {
     @EnvironmentObject private var userData: UserData
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    //CoreData var
+     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
     var names = [String]()
@@ -79,7 +77,7 @@ struct AddScoreView: View {
                     Spacer()
                     Button(action: {
                         print("Name is \(self.selectedName)")
-                        self.presentationMode.wrappedValue.dismiss() 
+                        self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Cancel")
                         
@@ -147,10 +145,10 @@ struct AddScoreView: View {
                             dateFormatter.pmSymbol = "PM"
                             record.entryTimeString = dateFormatter.string(from: Date())
                             record.entryTime = Date()
-                        record.playerID = self.userData.playerID!
-                        do {
-                            try self.managedObjectContext.save()
-                        } catch{
+                            record.playerID = self.userData.playerID!
+                         do {
+                             try self.managedObjectContext.save()
+                         } catch{
                             print(error)
                         }
                     
@@ -190,11 +188,8 @@ struct AddScoreView: View {
         
     }
 }
-
-
 struct AddScoreView_Previews: PreviewProvider {
     static var previews: some View {
         AddScoreView()
     }
 }
-

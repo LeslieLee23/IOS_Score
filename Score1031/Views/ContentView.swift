@@ -20,7 +20,6 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
     @State var names = [String]()
-    @State var oldscore = [String]()
     
     var body: some View {
         NavigationView{
@@ -31,18 +30,11 @@ struct ContentView: View {
                 VStack {
                     
                     HStack{
-//                        NavigationLink (destination: SelectPlayersView())
-//                        {
-//                            Text("Change Players")
-//                                .fontWeight(.light)
-//                                .font(.system(size:15))
-//                        }
                         Spacer()
                          Text("Emoji Mode")
                             .font(.system(size:15))
                     }
                     .padding(.trailing, 35)
-                    .padding(.leading, 35)
                     
                     HStack {
                         Spacer()
@@ -87,7 +79,7 @@ struct ContentView: View {
             }
             //Add Score Button row
             VStack {
-                NavigationLink (destination: AddScoreView(names: names, oldscore: oldscore)) {
+                NavigationLink (destination: AddScoreView(names: names)) {
                     Text("Add Score!")
                         .fontWeight(.semibold)
                 }
@@ -97,9 +89,9 @@ struct ContentView: View {
                 .background(LinearGradient(gradient: Gradient(colors: [Color("isaacblue"), Color("destinygreen")]), startPoint: .leading, endPoint: .trailing))
             .cornerRadius(13)
             .simultaneousGesture(TapGesture().onEnded {
-                self.addEidtChoice.addViewSelected = true
-                self.names  = ["\(self.nameAndScore.playerOneEmoji!) \( self.nameAndScore.playerOneName!)","\( self.nameAndScore.playerTwoEmoji!) \( self.nameAndScore.playerTwoName!)"]
-                self.oldscore = ["\(self.nameAndScore.PlayerOneScore)", "\(self.nameAndScore.PlayerTwoScore)"]
+                
+                self.names  = ["\(self.nameAndScore.playerOneName ?? "P1")","\(self.nameAndScore.playerTwoName ?? "P2")"]
+                print("\(self.names[1])")
             })
 
                 }
@@ -107,7 +99,7 @@ struct ContentView: View {
             Spacer()
             //Edit Score Button row
            VStack {
-            NavigationLink (destination: AddScoreView(names: names, oldscore: oldscore)) {
+            NavigationLink (destination: AddScoreView(names: names)) {
                    Text("Edit Score!")
                    .fontWeight(.semibold)
                }
@@ -117,9 +109,9 @@ struct ContentView: View {
                 .background(LinearGradient(gradient: Gradient(colors: [Color("destinygreen"), Color("isaacblue")]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(13)
             .simultaneousGesture(TapGesture().onEnded {
+                print("Hey Hey Yo Yo")
                 self.addEidtChoice.addViewSelected = false
-                self.names  = ["\(self.nameAndScore.playerOneEmoji!) \( self.nameAndScore.playerOneName!)","\( self.nameAndScore.playerTwoEmoji!) \( self.nameAndScore.playerTwoName!)"]
-                self.oldscore = ["\(self.nameAndScore.PlayerOneScore)", "\(self.nameAndScore.PlayerTwoScore)"]
+                self.names  = ["\(self.nameAndScore.playerOneName ?? "P1")","\(self.nameAndScore.playerTwoName ?? "P2")"]
             })
 
                }
@@ -144,26 +136,11 @@ struct ContentView: View {
                     VStack {
                         NavigationLink (destination: ChangePlayerView())
                         {
-                            Text("Add Players")
+                            Text("Change Players")
                                 .fontWeight(.light)
                                 .font(.system(size:15))
                         }
                         .padding()
-                        .simultaneousGesture(TapGesture().onEnded {
-                            let player = Player(context: self.managedObjectContext)
-                            player.playerOneName = self.nameAndScore.playerOneName
-                            player.playerOneEmoji = self.nameAndScore.playerOneEmoji
-                            player.playerOneScore = Int16(self.nameAndScore.PlayerOneScore)
-                            player.playerTwoName = self.nameAndScore.playerTwoName
-                            player.playerTwoEmoji = self.nameAndScore.playerTwoEmoji
-                            player.playerTwoScore = Int16(self.nameAndScore.PlayerTwoScore)
-                            player.playerID = self.userData.playerID!
-                            do {
-                                try self.managedObjectContext.save()
-                                } catch{
-                                    print(error)
-                                }
-                            })
                         Spacer()
                     }
                 }
