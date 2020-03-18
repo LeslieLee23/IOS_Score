@@ -32,11 +32,11 @@ struct HistoryView: View {
                      }
 
                  }
-                 .onDelete { indexSet in
-                     for index in indexSet {
-                        self.managedObjectContext.delete(self.records[index])
-                        try? self.managedObjectContext.save()
-                    }}
+//                 .onDelete { indexSet in
+//                     for index in indexSet {
+//                        self.managedObjectContext.delete(self.records[index])
+//                        try? self.managedObjectContext.save()
+//                    }}
                 .navigationBarTitle(Text("Score Change History"))
             }
         }

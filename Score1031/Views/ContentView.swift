@@ -31,6 +31,13 @@ struct ContentView: View {
                 VStack {
                     
                     HStack{
+                        NavigationLink (destination: SelectPlayersView())
+                        {
+                            Text("Change Players")
+                                .fontWeight(.light)
+                                .font(.system(size:15))
+                                .padding()
+                        }
                         Spacer()
                          Text("Emoji Mode")
                             .font(.system(size:15))
@@ -141,6 +148,7 @@ struct ContentView: View {
                                 .fontWeight(.light)
                                 .font(.system(size:15))
                         }
+
                         .padding()
                         Spacer()
                     }

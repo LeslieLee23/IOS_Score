@@ -105,6 +105,20 @@ struct ChangePlayerView: View {
                 record.playerID = self.id
                 
                 record.player = Player(context: self.managedObjectContext)
+                record.player?.playerOneName = self.playerOneName
+                record.player?.playerTwoName = self.playerTwoName
+                record.player?.playerOneEmoji = self.playerOneEmoji
+                record.player?.playerTwoEmoji = self.playerTwoEmoji
+                record.player?.playerOneScore = 0
+                record.player?.playerTwoScore = 0
+                record.player?.playerID = self.id
+                
+                 do {
+                     try self.managedObjectContext.save()
+                 } catch{
+                    print(error)
+                }
+                
             }) {
                 Text("Change Players")
             }
@@ -112,7 +126,7 @@ struct ChangePlayerView: View {
                           // .disabled(Double(scoreEdited)  == nil)
             .alert(isPresented: $showAlert) { () ->
                 Alert in
-                return Alert(title: Text("Player Changed!"), message: Text("You changed player one to \(self.playerOneName), with emoji \(self.playerOneEmoji). You changed player two to  to \(self.playerTwoName), with emoji \(self.playerTwoEmoji)."), dismissButton: Alert.Button.default(Text("Ok"))
+                return Alert(title: Text("Player Changed!"), message: Text("You changed player one to \(self.playerOneName), with emoji \(self.playerOneEmoji). You changed player two to \(self.playerTwoName), with emoji \(self.playerTwoEmoji)."), dismissButton: Alert.Button.default(Text("Ok"))
                     {self.presentationMode.wrappedValue.dismiss() }
                     )
                 

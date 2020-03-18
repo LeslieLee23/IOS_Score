@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct RecordView: View {
-    var name: String = ""
+     var name: String = ""
      var score: String = ""
      var reason: String = ""
      var entryTime: String = ""
