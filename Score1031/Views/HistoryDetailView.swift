@@ -63,7 +63,7 @@ struct HistoryDetailView: View {
                     Text("\(self.record.ponescore!)")
                         .font(.system(size: 25))
                     Spacer()
-                                                     Text("\(Int(self.record.ptwoscore!)! - Int(self.record.score!)!)")
+                    Text("\(Int(self.record.ptwoscore!)! - Int(self.record.score!)!)")
                         .font(.system(size: 25))
                     Spacer()
                 }

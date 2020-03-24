@@ -18,7 +18,7 @@ struct ContentView: View {
 
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
+
     @State var names = [String]()
     @State var oldscore = [String]()
     
@@ -38,6 +38,38 @@ struct ContentView: View {
                                 .font(.system(size:15))
                                 .padding()
                         }
+                        .simultaneousGesture(TapGesture().onEnded {
+                             
+                            let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Player")
+                            fetchRequest.predicate = NSPredicate(format: "playerID == %@", self.userData.playerID!)
+                            do
+                            {
+                                let player = try self.managedObjectContext.fetch(fetchRequest)
+                                
+                                    let objectUpdate = player[0] as! NSManagedObject
+                                    objectUpdate.setValue(self.nameAndScore.PlayerOneScore, forKey: "playerOneScore")
+                                    objectUpdate.setValue(self.nameAndScore.PlayerTwoScore, forKey: "playerTwoScore")
+                                do{
+                                    try self.managedObjectContext.save()
+                                    print(objectUpdate.value(forKey: "playerID") ?? "no playerID")
+                                    print(objectUpdate.value(forKey: "playerOneEmoji") ?? "no playerOneEmoji")
+                                    print(objectUpdate.value(forKey: "playerOneName") ?? "no playerOneName")
+                                    print(objectUpdate.value(forKey: "playerOneScore") ?? "no playerOneScore")
+                                    print(objectUpdate.value(forKey: "playerTwoEmoji") ?? "no playerTwoEmoji")
+                                    print(objectUpdate.value(forKey: "playerTwoName") ?? "no playerTwoName")
+                                    print(objectUpdate.value(forKey: "playerTwoScore") ?? "no playerTwoScore")
+                                }
+                                catch
+                                {
+                                    print(error)
+                                }
+                            }
+                            catch
+                            {
+                                print(error)
+                            }
+                        })
+                        
                         Spacer()
                          Text("Emoji Mode")
                             .font(.system(size:15))
@@ -148,8 +180,39 @@ struct ContentView: View {
                                 .fontWeight(.light)
                                 .font(.system(size:15))
                         }
-
                         .padding()
+                            
+//Set player record with updated scores
+                        .simultaneousGesture(TapGesture().onEnded {
+                            let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Player")
+                            fetchRequest.predicate = NSPredicate(format: "playerID == %@", self.userData.playerID!)
+                            do
+                            {
+                                let player = try self.managedObjectContext.fetch(fetchRequest)
+                                let objectUpdate = player[0] as! NSManagedObject
+                                objectUpdate.setValue(self.nameAndScore.PlayerOneScore, forKey: "playerOneScore")
+                                objectUpdate.setValue(self.nameAndScore.PlayerTwoScore, forKey: "playerTwoScore")
+                                do{
+                                    try self.managedObjectContext.save()
+                                    print(objectUpdate.value(forKey: "playerID") ?? "no playerID")
+                                    print(objectUpdate.value(forKey: "playerOneEmoji") ?? "no playerOneEmoji")
+                                    print(objectUpdate.value(forKey: "playerOneName") ?? "no playerOneName")
+                                    print(objectUpdate.value(forKey: "playerOneScore") ?? "no playerOneScore")
+                                    print(objectUpdate.value(forKey: "playerTwoEmoji") ?? "no playerTwoEmoji")
+                                    print(objectUpdate.value(forKey: "playerTwoName") ?? "no playerTwoName")
+                                    print(objectUpdate.value(forKey: "playerTwoScore") ?? "no playerTwoScore")
+                                }
+                                catch
+                                {
+                                    print(error)
+                                }
+                            }
+                            catch
+                            {
+                                print(error)
+                            }
+                        })
+                        
                         Spacer()
                     }
                 }
@@ -182,6 +245,7 @@ struct ContentView: View {
                 }
             }
             }} }
+    
 
 
 

@@ -115,9 +115,9 @@ struct AddScoreView: View {
                     }
                         
                         ///CoreData save
-                        let record = Record(context: self.managedObjectContext)
-                            record.name = self.selectedNameString
-                            record.addEdit = self.addEidtChoice.addViewSelected
+                    let record = Record(context: self.managedObjectContext)
+                        record.name = self.selectedNameString
+                        record.addEdit = self.addEidtChoice.addViewSelected
                     if self.addEidtChoice.addViewSelected == true {
                         if self.scoreEdited.first == "-" || self.scoreEdited == "0" {
                             record.score = self.scoreEdited

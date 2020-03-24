@@ -14,7 +14,8 @@ struct SelectView: View {
     var playerTwoName: String = ""
     var playerOneScore: String = ""
     var playerTwoScore: String = ""
-
+    var playerOneEmoji: String = ""
+    var playerTwoEmoji: String = ""
     
     var body: some View {
         HStack {
@@ -24,14 +25,14 @@ struct SelectView: View {
             .frame(width:80,height: 45, alignment: .leading)
                 
             VStack(alignment: .leading){
-                Text(playerOneName)
-                    .font(.caption)
+                Text("\(playerOneEmoji) \(playerOneName)")
+                    //.font(.caption)
                 Text(String(playerOneScore))
             }
             .frame(width:100, height: 45, alignment: .leading)
             VStack(alignment: .leading){
-                Text(playerTwoName)
-                    .font(.caption)
+                Text("\(playerTwoEmoji) \(playerTwoName)")
+                    //.font(.caption)
                 Text(String(playerTwoScore))
             }
             .frame(width:100, height: 45, alignment: .leading)
