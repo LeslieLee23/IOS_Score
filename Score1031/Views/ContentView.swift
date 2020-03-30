@@ -38,37 +38,37 @@ struct ContentView: View {
                                 .font(.system(size:15))
                                 .padding()
                         }
-                        .simultaneousGesture(TapGesture().onEnded {
-                             
-                            let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Player")
-                            fetchRequest.predicate = NSPredicate(format: "playerID == %@", self.userData.playerID!)
-                            do
-                            {
-                                let player = try self.managedObjectContext.fetch(fetchRequest)
-                                
-                                    let objectUpdate = player[0] as! NSManagedObject
-                                    objectUpdate.setValue(self.nameAndScore.PlayerOneScore, forKey: "playerOneScore")
-                                    objectUpdate.setValue(self.nameAndScore.PlayerTwoScore, forKey: "playerTwoScore")
-                                do{
-                                    try self.managedObjectContext.save()
-                                    print(objectUpdate.value(forKey: "playerID") ?? "no playerID")
-                                    print(objectUpdate.value(forKey: "playerOneEmoji") ?? "no playerOneEmoji")
-                                    print(objectUpdate.value(forKey: "playerOneName") ?? "no playerOneName")
-                                    print(objectUpdate.value(forKey: "playerOneScore") ?? "no playerOneScore")
-                                    print(objectUpdate.value(forKey: "playerTwoEmoji") ?? "no playerTwoEmoji")
-                                    print(objectUpdate.value(forKey: "playerTwoName") ?? "no playerTwoName")
-                                    print(objectUpdate.value(forKey: "playerTwoScore") ?? "no playerTwoScore")
-                                }
-                                catch
-                                {
-                                    print(error)
-                                }
-                            }
-                            catch
-                            {
-                                print(error)
-                            }
-                        })
+//                        .simultaneousGesture(TapGesture().onEnded {
+//
+//                            let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Player")
+//                            fetchRequest.predicate = NSPredicate(format: "playerID == %@", self.userData.playerID!)
+//                            do
+//                            {
+//                                let player = try self.managedObjectContext.fetch(fetchRequest)
+//
+//                                    let objectUpdate = player[0] as! NSManagedObject
+//                                    objectUpdate.setValue(self.nameAndScore.PlayerOneScore, forKey: "playerOneScore")
+//                                    objectUpdate.setValue(self.nameAndScore.PlayerTwoScore, forKey: "playerTwoScore")
+//                                do{
+//                                    try self.managedObjectContext.save()
+//                                    print(objectUpdate.value(forKey: "playerID") ?? "no playerID")
+//                                    print(objectUpdate.value(forKey: "playerOneEmoji") ?? "no playerOneEmoji")
+//                                    print(objectUpdate.value(forKey: "playerOneName") ?? "no playerOneName")
+//                                    print(objectUpdate.value(forKey: "playerOneScore") ?? "no playerOneScore")
+//                                    print(objectUpdate.value(forKey: "playerTwoEmoji") ?? "no playerTwoEmoji")
+//                                    print(objectUpdate.value(forKey: "playerTwoName") ?? "no playerTwoName")
+//                                    print(objectUpdate.value(forKey: "playerTwoScore") ?? "no playerTwoScore")
+//                                }
+//                                catch
+//                                {
+//                                    print(error)
+//                                }
+//                            }
+//                            catch
+//                            {
+//                                print(error)
+//                            }
+//                        })
                         
                         Spacer()
                          Text("Emoji Mode")
@@ -107,10 +107,10 @@ struct ContentView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Text("\((self.userData.showEmoji ? self.nameAndScore.playerOneEmoji! : self.nameAndScore.playerOneName!) )")
+                    Text("\((self.userData.showEmoji ? self.nameAndScore.playerOneEmoji ?? "" : self.nameAndScore.playerOneName ?? "") )")
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
-                    Text("\((self.userData.showEmoji ? self.nameAndScore.playerTwoEmoji! : self.nameAndScore.playerTwoName!) )")
+                    Text("\((self.userData.showEmoji ? self.nameAndScore.playerTwoEmoji ?? "" : self.nameAndScore.playerTwoName ?? "") )")
                     .font(.system(size: self.userData.showEmoji ? 45 : 25))
                     Spacer()
                 }
@@ -182,36 +182,36 @@ struct ContentView: View {
                         }
                         .padding()
                             
-//Set player record with updated scores
-                        .simultaneousGesture(TapGesture().onEnded {
-                            let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Player")
-                            fetchRequest.predicate = NSPredicate(format: "playerID == %@", self.userData.playerID!)
-                            do
-                            {
-                                let player = try self.managedObjectContext.fetch(fetchRequest)
-                                let objectUpdate = player[0] as! NSManagedObject
-                                objectUpdate.setValue(self.nameAndScore.PlayerOneScore, forKey: "playerOneScore")
-                                objectUpdate.setValue(self.nameAndScore.PlayerTwoScore, forKey: "playerTwoScore")
-                                do{
-                                    try self.managedObjectContext.save()
-                                    print(objectUpdate.value(forKey: "playerID") ?? "no playerID")
-                                    print(objectUpdate.value(forKey: "playerOneEmoji") ?? "no playerOneEmoji")
-                                    print(objectUpdate.value(forKey: "playerOneName") ?? "no playerOneName")
-                                    print(objectUpdate.value(forKey: "playerOneScore") ?? "no playerOneScore")
-                                    print(objectUpdate.value(forKey: "playerTwoEmoji") ?? "no playerTwoEmoji")
-                                    print(objectUpdate.value(forKey: "playerTwoName") ?? "no playerTwoName")
-                                    print(objectUpdate.value(forKey: "playerTwoScore") ?? "no playerTwoScore")
-                                }
-                                catch
-                                {
-                                    print(error)
-                                }
-                            }
-                            catch
-                            {
-                                print(error)
-                            }
-                        })
+// Set player record with updated scores
+//                        .simultaneousGesture(TapGesture().onEnded {
+//                            let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Player")
+//                            fetchRequest.predicate = NSPredicate(format: "playerID == %@", self.userData.playerID!)
+//                            do
+//                            {
+//                                let player = try self.managedObjectContext.fetch(fetchRequest)
+//                                let objectUpdate = player[0] as! NSManagedObject
+//                                objectUpdate.setValue(self.nameAndScore.PlayerOneScore, forKey: "playerOneScore")
+//                                objectUpdate.setValue(self.nameAndScore.PlayerTwoScore, forKey: "playerTwoScore")
+//                                do{
+//                                    try self.managedObjectContext.save()
+//                                    print(objectUpdate.value(forKey: "playerID") ?? "no playerID")
+//                                    print(objectUpdate.value(forKey: "playerOneEmoji") ?? "no playerOneEmoji")
+//                                    print(objectUpdate.value(forKey: "playerOneName") ?? "no playerOneName")
+//                                    print(objectUpdate.value(forKey: "playerOneScore") ?? "no playerOneScore")
+//                                    print(objectUpdate.value(forKey: "playerTwoEmoji") ?? "no playerTwoEmoji")
+//                                    print(objectUpdate.value(forKey: "playerTwoName") ?? "no playerTwoName")
+//                                    print(objectUpdate.value(forKey: "playerTwoScore") ?? "no playerTwoScore")
+//                                }
+//                                catch
+//                                {
+//                                    print(error)
+//                                }
+//                            }
+//                            catch
+//                            {
+//                                print(error)
+//                            }
+//                        })
                         
                         Spacer()
                     }
@@ -223,7 +223,7 @@ struct ContentView: View {
                         Button(action: {
                             self.nameAndScore.PlayerTwoScore = 0
                             self.nameAndScore.PlayerOneScore = 0
-                        //Delete all Core Data rows
+                        //Delete all Record Data rows
                         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Record")
                         fetchRequest.includesPropertyValues = false
                         
@@ -236,6 +236,21 @@ struct ContentView: View {
                         } catch let error {
                             print("Detele all data in Record error :", error)
                         }
+                            //Delete all Record Data rows
+                            let fetchRequest2 = NSFetchRequest<NSFetchRequestResult>(entityName: "Player")
+                            fetchRequest2.includesPropertyValues = false
+                            
+                            do {
+                                let items = try self.managedObjectContext.fetch(fetchRequest2) as! [NSManagedObject]
+                                for item in items {
+                                    self.managedObjectContext.delete(item)
+                                }
+                                try self.managedObjectContext.save()
+                            } catch let error {
+                                print("Detele all data in Record error :", error)
+                            }
+                            
+                            
                             
                         })
                         {
