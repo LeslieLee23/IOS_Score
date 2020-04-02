@@ -29,6 +29,7 @@ struct HistoryView: View {
                          destination: HistoryDetailView(record: record)) {
                              RecordView(name: record.name!, score: record.score!, reason: record.reason!, entryTime: record.entryTimeString!, playerID: record.playerID)
                      }
+                     .disabled(record.score == "NA")
                      }
 
                  }

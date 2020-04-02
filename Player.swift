@@ -9,6 +9,8 @@
 
 import Foundation
 import CoreData
+import UIKit
+
 
 public class Player:NSManagedObject, Identifiable {
     @NSManaged public var playerID: String
@@ -19,6 +21,7 @@ public class Player:NSManagedObject, Identifiable {
     @NSManaged public var playerTwoName: String?
     @NSManaged public var playerTwoScore: Int16
     @NSManaged public var record: NSSet?
+    
     
     
     public var recordArray: [Record] {
@@ -38,42 +41,10 @@ extension Player {
         
         return request
     }
-        
+        static func getProductCount() -> Int {
+        let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Player")
+        let count = try! managedObjectContext.count(for: fetchRequest)
+        return count
+        }
 }
-
-
-
-
-//extension Player {
-//
-//    @nonobjc public class func fetchRequest() -> NSFetchRequest<Player> {
-//        return NSFetchRequest<Player>(entityName: "Player")
-//    }
-//
-//    @NSManaged public var playerID: String?
-//    @NSManaged public var playerOneEmoji: String?
-//    @NSManaged public var playerOneName: String?
-//    @NSManaged public var playerOneScore: Int16
-//    @NSManaged public var playerTwoEmoji: String?
-//    @NSManaged public var playerTwoName: String?
-//    @NSManaged public var playerTwoScore: Int16
-//    @NSManaged public var record: NSSet?
-//
-//}
-//
-//// MARK: Generated accessors for record
-//extension Player {
-//
-//    @objc(addRecordObject:)
-//    @NSManaged public func addToRecord(_ value: Record)
-//
-//    @objc(removeRecordObject:)
-//    @NSManaged public func removeFromRecord(_ value: Record)
-//
-//    @objc(addRecord:)
-//    @NSManaged public func addToRecord(_ values: NSSet)
-//
-//    @objc(removeRecord:)
-//    @NSManaged public func removeFromRecord(_ values: NSSet)
-//
-//}
