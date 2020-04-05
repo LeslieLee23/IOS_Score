@@ -57,6 +57,7 @@ struct ChangePlayerView: View {
             Group{
         HStack{
         Text("Enter name for player one:")
+            .padding(.leading)
         Spacer()
         }
         HStack{
@@ -67,6 +68,7 @@ struct ChangePlayerView: View {
         }
         HStack{
         Text("Enter Emoji for player one:")
+            .padding(.leading)
         Spacer()
         }
         HStack{
@@ -77,6 +79,7 @@ struct ChangePlayerView: View {
         }
         HStack{
         Text("Enter name for player two:")
+            .padding(.leading)
         Spacer()
         }
         HStack{
@@ -87,6 +90,7 @@ struct ChangePlayerView: View {
         }
         HStack{
         Text("Enter emoji for player two:")
+            .padding(.leading)
         Spacer()
         }
         HStack{
@@ -97,14 +101,8 @@ struct ChangePlayerView: View {
         }
             }
         Spacer()
-        Spacer()
-//        HStack{
-//        TextField("EnterID", text: $id)
-//        .textFieldStyle(RoundedBorderTextFieldStyle())
-//        .padding(.trailing, 35)
-//        .padding(.leading, 35)
-//        }
         HStack{
+           
             Spacer()
             Button(action: {
                 
@@ -150,6 +148,7 @@ struct ChangePlayerView: View {
                 
             }) {
                 Text("Change Players")
+                .padding(.trailing, 35)
             }
                 .disabled(playerOneName.isEmpty)
                 .disabled(playerOneEmoji.isEmpty)
@@ -167,7 +166,13 @@ struct ChangePlayerView: View {
             }
             }
             Spacer()
+            Spacer()
+            Spacer()
+            Spacer()
+            Spacer()
+            Spacer()
         }
+    
     }
 }
 

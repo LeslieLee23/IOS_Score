@@ -18,34 +18,34 @@ struct HistoryView: View {
      @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
      @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
      @EnvironmentObject private var userData: UserData
+     var creationDate: String
 
      var body: some View {
 
          NavigationView {
              List {
                  ForEach(self.records) {record in
-                     if record.playerID == self.userData.playerID {
+                     if record.playerID == self.userData.playerID && record.score != "NA" {
                      NavigationLink(
                          destination: HistoryDetailView(record: record)) {
-                             RecordView(name: record.name!, score: record.score!, reason: record.reason!, entryTime: record.entryTimeString!, playerID: record.playerID)
+                             RecordView(name: record.name!, score: record.score!, reason: record.reason!, entryTime: record.entryTimeString!)
                      }
-                     .disabled(record.score == "NA")
+                     //.disabled(record.score == "NA")
+                     
                      }
 
                  }
-//                 .onDelete { indexSet in
-//                     for index in indexSet {
-//                        self.managedObjectContext.delete(self.records[index])
-//                        try? self.managedObjectContext.save()
-//                    }}
+                  FilteredList(playerID: self.userData.playerID!)
                 .navigationBarTitle(Text("Score Change History"))
             }
+            
+            
         }
     }
     
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryView()
+        HistoryView(creationDate: "")
     }
 }
 }

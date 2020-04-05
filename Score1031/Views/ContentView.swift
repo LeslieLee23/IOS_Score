@@ -18,9 +18,17 @@ struct ContentView: View {
 
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: Player.getAllRecords()) var players: FetchedResults<Player>
+//    @FetchRequest(
+//        entity: Record.entity(),
+//        sortDescriptors: [
+//            NSSortDescriptor(keyPath: \Record.name, ascending: true),
+//        ],
+//        predicate: NSPredicate(format: "score == %@ AND playerID == %@", "NA", "2")
+//    ) var recordInit: FetchedResults<Record>
+    @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
     @State var names = [String]()
     @State var oldscore = [String]()
+    @State var creationDate: String = ""
     
     var body: some View {
         NavigationView{
@@ -51,13 +59,6 @@ struct ContentView: View {
                                     objectUpdate.setValue(self.nameAndScore.PlayerTwoScore, forKey: "playerTwoScore")
                                 do{
                                     try self.managedObjectContext.save()
-                                    print(objectUpdate.value(forKey: "playerID") ?? "no playerID")
-                                    print(objectUpdate.value(forKey: "playerOneEmoji") ?? "no playerOneEmoji")
-                                    print(objectUpdate.value(forKey: "playerOneName") ?? "no playerOneName")
-                                    print(objectUpdate.value(forKey: "playerOneScore") ?? "no playerOneScore")
-                                    print(objectUpdate.value(forKey: "playerTwoEmoji") ?? "no playerTwoEmoji")
-                                    print(objectUpdate.value(forKey: "playerTwoName") ?? "no playerTwoName")
-                                    print(objectUpdate.value(forKey: "playerTwoScore") ?? "no playerTwoScore")
                                 }
                                 catch
                                 {
@@ -149,6 +150,7 @@ struct ContentView: View {
                 .foregroundColor(.white)
                 .background(LinearGradient(gradient: Gradient(colors: [Color("destinygreen"), Color("isaacblue")]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(13)
+                
             .simultaneousGesture(TapGesture().onEnded {
                 self.addEidtChoice.addViewSelected = false
                 self.names  = ["\(self.nameAndScore.playerOneEmoji!) \( self.nameAndScore.playerOneName!)","\( self.nameAndScore.playerTwoEmoji!) \( self.nameAndScore.playerTwoName!)"]
@@ -164,7 +166,7 @@ struct ContentView: View {
                     
                 HStack {
                     VStack {
-                        NavigationLink (destination: HistoryView())
+                        NavigationLink (destination: HistoryView(creationDate: creationDate))
                         {
                             Text("View History")
                                 .fontWeight(.light)
@@ -207,13 +209,6 @@ struct ContentView: View {
                                 objectUpdate.setValue(self.nameAndScore.PlayerTwoScore, forKey: "playerTwoScore")
                                 do{
                                     try self.managedObjectContext.save()
-                                    print(objectUpdate.value(forKey: "playerID") ?? "no playerID")
-                                    print(objectUpdate.value(forKey: "playerOneEmoji") ?? "no playerOneEmoji")
-                                    print(objectUpdate.value(forKey: "playerOneName") ?? "no playerOneName")
-                                    print(objectUpdate.value(forKey: "playerOneScore") ?? "no playerOneScore")
-                                    print(objectUpdate.value(forKey: "playerTwoEmoji") ?? "no playerTwoEmoji")
-                                    print(objectUpdate.value(forKey: "playerTwoName") ?? "no playerTwoName")
-                                    print(objectUpdate.value(forKey: "playerTwoScore") ?? "no playerTwoScore")
                                 }
                                 catch
                                 {
@@ -250,7 +245,7 @@ struct ContentView: View {
                         } catch let error {
                             print("Detele all data in Record error :", error)
                         }
-                            //Delete all Record Data rows
+                        //Delete all Player Data rows
                             let fetchRequest2 = NSFetchRequest<NSFetchRequestResult>(entityName: "Player")
                             fetchRequest2.includesPropertyValues = false
                             

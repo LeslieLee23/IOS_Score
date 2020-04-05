@@ -20,6 +20,7 @@
 		F53BDFDC236B44CF00C3E203 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F53BDFDA236B44CF00C3E203 /* LaunchScreen.storyboard */; };
 		F53BDFE42371E48500C3E203 /* AddScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53BDFE32371E48500C3E203 /* AddScoreView.swift */; };
 		F53BE01B2384482700C3E203 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53BE01A2384482700C3E203 /* UserData.swift */; };
+		F54C70052439A12500FD5175 /* CreationTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54C70042439A12500FD5175 /* CreationTime.swift */; };
 		F55E8EF1240D7F6200B6CD21 /* ChangePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E8EF0240D7F6200B6CD21 /* ChangePlayerView.swift */; };
 		F57BF4012404940D00141AF8 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57BF4002404940D00141AF8 /* HistoryDetailView.swift */; };
 		F591294C241FD2540071E1D3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F591294A241FD2540071E1D3 /* Player.swift */; };
@@ -44,6 +45,7 @@
 		F53BDFDD236B44CF00C3E203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F53BDFE32371E48500C3E203 /* AddScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScoreView.swift; sourceTree = "<group>"; };
 		F53BE01A2384482700C3E203 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		F54C70042439A12500FD5175 /* CreationTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationTime.swift; sourceTree = "<group>"; };
 		F55E8EF0240D7F6200B6CD21 /* ChangePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePlayerView.swift; sourceTree = "<group>"; };
 		F57BF4002404940D00141AF8 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
 		F591294A241FD2540071E1D3 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = SOURCE_ROOT; };
@@ -80,12 +82,13 @@
 			children = (
 				F53BDFD3236B44CC00C3E203 /* ContentView.swift */,
 				F51C7A3923D569C500540B25 /* HistoryView.swift */,
-				F53BDFE32371E48500C3E203 /* AddScoreView.swift */,
-				F55E8EF0240D7F6200B6CD21 /* ChangePlayerView.swift */,
 				F51C7A3123C78B1700540B25 /* RecordView.swift */,
 				F57BF4002404940D00141AF8 /* HistoryDetailView.swift */,
+				F53BDFE32371E48500C3E203 /* AddScoreView.swift */,
+				F55E8EF0240D7F6200B6CD21 /* ChangePlayerView.swift */,
 				F591294D241FE1C20071E1D3 /* SelectPlayerView.swift */,
 				F591294F2420368F0071E1D3 /* SelectView.swift */,
+				F54C70042439A12500FD5175 /* CreationTime.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				F591294E241FE1C20071E1D3 /* SelectPlayerView.swift in Sources */,
 				F51C7A3A23D569C500540B25 /* HistoryView.swift in Sources */,
 				F53BDFD2236B44CC00C3E203 /* SceneDelegate.swift in Sources */,
+				F54C70052439A12500FD5175 /* CreationTime.swift in Sources */,
 				F591294C241FD2540071E1D3 /* Player.swift in Sources */,
 				F57BF4012404940D00141AF8 /* HistoryDetailView.swift in Sources */,
 				F53BDFD4236B44CC00C3E203 /* ContentView.swift in Sources */,
