@@ -18,13 +18,6 @@ struct ContentView: View {
 
     //CoreData var
     @Environment(\.managedObjectContext) var managedObjectContext
-//    @FetchRequest(
-//        entity: Record.entity(),
-//        sortDescriptors: [
-//            NSSortDescriptor(keyPath: \Record.name, ascending: true),
-//        ],
-//        predicate: NSPredicate(format: "score == %@ AND playerID == %@", "NA", "2")
-//    ) var recordInit: FetchedResults<Record>
     @FetchRequest(fetchRequest: Record.getAllRecords()) var records: FetchedResults<Record>
     @State var names = [String]()
     @State var oldscore = [String]()
@@ -70,7 +63,7 @@ struct ContentView: View {
                                 print(error)
                             }
                         })
-                            .disabled(Player.getProductCount() == 0)
+                            .disabled(Player.getProductCount() < 2 )
                         
                         Spacer()
                          Text("Emoji Mode")
@@ -88,7 +81,7 @@ struct ContentView: View {
                     }
                 //Title row
                 Spacer()
-                Text("Credit Score")
+                Text("Scoreboard")
                     .font(.headline)
                     .fontWeight(.bold)
                     .padding(0.0)

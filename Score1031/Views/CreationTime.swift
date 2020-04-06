@@ -16,9 +16,14 @@ struct FilteredList: View {
     var body: some View {
         List(fetchRequest.wrappedValue, id: \.self) { record
             in
-            VStack(alignment: .leading){
+            VStack(){
+                HStack() {
+            Spacer()
             Text("Players created at \(record.entryTimeString ?? "No Date Avaliable")")
-            .font(.caption)
+                .font(.system(size: 13))
+                .foregroundColor(.blue)
+
+            }
             }
            // .frame(width:300,height: 45, alignment: .leading)
             

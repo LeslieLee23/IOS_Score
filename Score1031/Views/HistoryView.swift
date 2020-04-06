@@ -30,13 +30,12 @@ struct HistoryView: View {
                          destination: HistoryDetailView(record: record)) {
                              RecordView(name: record.name!, score: record.score!, reason: record.reason!, entryTime: record.entryTimeString!)
                      }
-                     //.disabled(record.score == "NA")
                      
                      }
 
                  }
                   FilteredList(playerID: self.userData.playerID!)
-                .navigationBarTitle(Text("Score Change History"))
+                    .navigationBarTitle(Text("Score Change History"), displayMode: .inline)
             }
             
             
