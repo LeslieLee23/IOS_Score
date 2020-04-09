@@ -23,15 +23,22 @@ struct HistoryDetailView: View {
          NavigationView{
          VStack {
              VStack(alignment: .leading) {
+                HStack {
+                VStack {
                  Text("\(self.record.entryTimeString!)")
                  if record.addEdit == true {
                      Text("\(self.record.score!) score for \(self.record.name!)")
                  } else {
                      Text("\(self.record.name!)'s score were edited")
                  }
-
-             Spacer()
+                }
+            }
+                HStack {
+                    Spacer()
+                }
              }
+            .padding(.leading)
+            
 
 
              VStack {
@@ -119,8 +126,9 @@ struct HistoryDetailView: View {
                 Spacer()
                 Spacer()
                 Spacer()
-                Spacer()
+
             }
+
             }
         }
     }

@@ -140,7 +140,7 @@ struct AddScoreView: View {
                             record.ptwoscore = String(self.nameAndScore.PlayerTwoScore)
                             record.addEdit = self.addEidtChoice.addViewSelected
                         let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "MMM d, yyyy HH:mm a"
+                            dateFormatter.dateFormat = "MMM d, yyyy h:mm a"
                             dateFormatter.amSymbol = "AM"
                             dateFormatter.pmSymbol = "PM"
                             record.entryTimeString = dateFormatter.string(from: Date())
@@ -169,7 +169,7 @@ struct AddScoreView: View {
                         return Alert(title: Text("Score added!"), message: Text("You added \(self.scoreEdited) \(self.pointGrammar) to \(self.selectedNameString)"), dismissButton: Alert.Button.default(Text("Ok"))
                             
                             // this part was learned from the RayRay class
-                           {self.presentationMode.wrappedValue.dismiss() }
+                      {self.presentationMode.wrappedValue.dismiss() }
                         )
                         } else {
                             return Alert(title: Text("Score edited!"), message: Text("You edited \(self.selectedNameString)'s score to \(self.scoreEdited)"), dismissButton: Alert.Button.default(Text("Ok"))

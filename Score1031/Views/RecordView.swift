@@ -30,10 +30,10 @@ struct RecordView: View {
            
             VStack(alignment: .leading){
                 Text(reason)
-                    .font(.caption)
+                    .font(.system(size: 13))
                     .multilineTextAlignment(.leading)
                 Text(entryTime)
-                    .font(.caption)
+                    .font(.system(size: 13))
             }
             .frame(width:210, height: 45, alignment: .leading)
           //  .border(Color.purple)
