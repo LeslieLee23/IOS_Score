@@ -13,11 +13,13 @@ struct RecordView: View {
      var score: String = ""
      var reason: String = ""
      var entryTime: String = ""
-
+     var playerID: String = ""
      var body: some View {
 
          HStack(){
              VStack(alignment: .leading){
+            Text(playerID)
+            .font(.headline)
              Text(name)
                  .font(.headline)
              Text(score)

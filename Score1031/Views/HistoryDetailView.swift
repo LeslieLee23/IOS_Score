@@ -25,11 +25,11 @@ struct HistoryDetailView: View {
              VStack(alignment: .leading) {
                 HStack {
                 VStack {
-                 Text("\(self.record.entryTimeString!)")
+                 Text("\(self.record.entryTimeString ?? "")")
                  if record.addEdit == true {
-                     Text("\(self.record.score!) score for \(self.record.name!)")
+                     Text("\(self.record.score ?? "NO ONE") score for \(self.record.name!)")
                  } else {
-                     Text("\(self.record.name!)'s score were edited")
+                     Text("\(self.record.name ?? "NO ONE")'s score were edited")
                  }
                 }
             }

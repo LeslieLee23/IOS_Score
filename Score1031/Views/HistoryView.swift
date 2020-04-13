@@ -28,7 +28,7 @@ struct HistoryView: View {
                      if record.playerID == self.userData.playerID && record.score != "NA" {
                      NavigationLink(
                          destination: HistoryDetailView(record: record)) {
-                             RecordView(name: record.name!, score: record.score!, reason: record.reason!, entryTime: record.entryTimeString!)
+                            RecordView(name: record.name!, score: record.score!, reason: record.reason!, entryTime: record.entryTimeString!, playerID: record.playerID)
                      }
                      
                      }
